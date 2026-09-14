@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George &amp; Manos — 6 September 2027, Crete</title>
+<meta name="description" content="George and Manos are getting married in Lentas, Crete, on 6 September 2027. Travel, the week, where to stay, RSVP.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="George &amp; Manos — 6 September 2027, Lentas, Crete">
+<meta property="og:description" content="Monday 6 September 2027, Lentas, Crete. We'll be there all week.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=GFS+Didot&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1D3244; --sea:#33647E; --sea-deep:#16344A; --stone:#F6F3EC; --sand:#EDE7DA;
+    --olive:#71714F; --gold:#B9974E; --hairline:rgba(29,50,68,.16); --max:1100px;
+    --display:'Marcellus',Georgia,serif;
+  }
+  html[lang="el"]{--display:'GFS Didot',Georgia,serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{font-family:'EB Garamond',Georgia,serif;background:var(--stone);color:var(--ink);line-height:1.6;font-size:1.1rem}
+  h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15}
+  a{color:var(--sea)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.4rem}
+  .narrow{max-width:700px;margin:0 auto}
+  .eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:.72rem;color:var(--olive);display:block;margin-bottom:1rem}
+  .meander{height:18px;max-width:220px;width:220px;margin:1.2rem auto 0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='18' viewBox='0 0 22 18'%3E%3Cpath d='M0 1.5 H22 M20.5 1.5 V16.5 H5.5 V6.5 H15.5 V11.5 H10.5' fill='none' stroke='%23B9974E' stroke-width='1.5' stroke-linejoin='miter'/%3E%3C/svg%3E") repeat-x left center;opacity:.8}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--stone) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:3.6rem;gap:1rem}
+  .mono{font-family:var(--display);font-size:1.05rem;letter-spacing:.14em;text-decoration:none;color:var(--ink)}
+  nav ul{display:flex;gap:1.4rem;list-style:none;align-items:center}
+  nav ul a{text-decoration:none;color:var(--ink);font-size:.8rem;text-transform:uppercase;letter-spacing:.14em}
+  nav ul a:hover{color:var(--gold)}
+  .lang{border:1px solid var(--hairline);background:transparent;font:inherit;font-size:.75rem;letter-spacing:.14em;padding:.3rem .6rem;cursor:pointer;color:var(--ink)}
+  .lang:hover{border-color:var(--gold)}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:.4rem;color:var(--ink)}
+  @media(max-width:900px){
+    nav ul{display:none;position:absolute;left:0;right:0;top:3.6rem;flex-direction:column;background:var(--stone);border-bottom:1px solid var(--hairline);padding:1rem 1.4rem 1.4rem;gap:1rem}
+    nav ul.open{display:flex}
+    .burger{display:block}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;height:92vh;min-height:620px;color:var(--stone);overflow:hidden;background:var(--sea-deep)}
+  .hero .art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+  .hero .art svg{width:100%;height:100%;display:block}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,52,74,0) 40%,rgba(22,52,74,.45) 58%,rgba(22,52,74,.85) 100%)}
+  .hero .content{position:absolute;z-index:1;left:0;right:0;top:53%;text-align:center;padding:0 1.4rem}
+  .hero .eyebrow{color:var(--stone);opacity:.92;text-shadow:0 1px 8px rgba(0,0,0,.35);margin-bottom:.9rem}
+  .hero h1{font-size:clamp(2.4rem,7vw,5rem);letter-spacing:.06em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,.25)}
+  .hero .amp{color:var(--gold);text-transform:none;font-family:'EB Garamond',serif;font-style:italic;font-size:.8em;padding:0 .1em}
+  .hero .strap{margin-top:1.2rem;font-size:clamp(1.05rem,2.4vw,1.4rem);font-family:var(--display);letter-spacing:.04em}
+  .hero .place{margin-top:.3rem;text-transform:uppercase;letter-spacing:.28em;font-size:.82rem;color:var(--gold)}
+  .countbar{background:var(--ink);color:var(--stone);padding:1.1rem 1.4rem;border-top:1px solid rgba(185,151,78,.35)}
+  .countdown{display:flex;gap:2.4rem;justify-content:center;align-items:baseline}
+  .countdown b{font-family:var(--display);font-size:1.5rem;display:block;color:var(--gold)}
+  .countdown span{text-transform:uppercase;letter-spacing:.2em;font-size:.6rem;opacity:.8}
+  .btn{display:inline-block;padding:.85rem 2.2rem;background:var(--gold);color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;border:1px solid var(--gold);cursor:pointer;font-family:'EB Garamond',serif;transition:.2s}
+  .btn:hover{background:transparent;color:var(--gold)}
+  .btn.ghost{background:transparent;color:var(--stone);border-color:rgba(246,243,236,.6)}
+  .btn.ghost:hover{background:var(--stone);color:var(--ink)}
+  .btn.dark{background:var(--ink);border-color:var(--ink)}
+  .btn.dark:hover{background:transparent;color:var(--ink)}
+  .hero .cta{margin-top:1.6rem;display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+
+  /* ---------- sections ---------- */
+  section{padding:5.5rem 0}
+  section.alt{background:#fff}
+  section.sand{background:var(--sand)}
+  .section-head{text-align:center;margin-bottom:3rem}
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.5rem);letter-spacing:.06em;text-transform:uppercase}
+  .lede{max-width:660px;margin:0 auto;text-align:center;font-size:1.16rem}
+  .lede p+p{margin-top:1rem}
+  .legend{margin-top:2.4rem;padding:1.6rem 1.8rem;border-left:2px solid var(--gold);font-style:italic;max-width:620px;margin-left:auto;margin-right:auto;text-align:left;background:rgba(185,151,78,.06)}
+
+  .days{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem;max-width:1000px;margin:0 auto}
+  .day{background:var(--stone);border:1px solid var(--hairline);padding:2rem 1.8rem}
+  .day .daylabel{text-transform:uppercase;letter-spacing:.24em;font-size:.7rem;color:var(--gold);display:block;margin-bottom:.4rem}
+  .day h3{font-size:1.35rem;margin-bottom:1.1rem}
+  .day ul{list-style:none}
+  .day li{display:grid;grid-template-columns:5rem 1fr;gap:.9rem;padding:.5rem 0;border-top:1px solid var(--hairline);font-size:1rem}
+  .day li:first-child{border-top:none}
+  .day time{font-family:var(--display);color:var(--sea)}
+  .day .note{margin-top:1rem;font-size:.95rem;font-style:italic;color:var(--olive)}
+  .weekbar{max-width:720px;margin:2.4rem auto 0;text-align:center;padding:1.1rem 1.6rem;border:1px solid var(--hairline);font-size:1.02rem}
+
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;max-width:1000px;margin:0 auto}
+  .info-card{background:#fff;border:1px solid var(--hairline);padding:2rem 1.8rem}
+  section.alt .info-card,section.sand .info-card{background:var(--stone)}
+  .info-card h3{font-size:1.25rem;margin-bottom:.8rem;display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+  .info-card .tag{font-family:'EB Garamond',serif;text-transform:uppercase;letter-spacing:.18em;font-size:.62rem;color:var(--gold)}
+  .info-card p{font-size:1rem}
+  .info-card p+p{margin-top:.7rem}
+  .info-card ul{margin:.6rem 0 0 1.1rem;font-size:1rem}
+  .info-card li+li{margin-top:.35rem}
+  .kv{margin-top:.8rem;display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;font-size:.97rem}
+  .kv dt{color:var(--olive);white-space:nowrap}
+  .price{font-family:var(--display);color:var(--sea);font-size:1.05rem}
+
+  .covers{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem;max-width:900px;margin:0 auto}
+  .cover-card{padding:2.2rem 2rem;border:1px solid var(--hairline)}
+  .cover-card.us{background:var(--ink);color:var(--stone)}
+  .cover-card.us h3{color:var(--gold)}
+  .cover-card.you{background:var(--stone)}
+  .cover-card h3{font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+  .cover-card ul{list-style:none}
+  .cover-card li{padding:.5rem 0;border-top:1px solid rgba(185,151,78,.3);font-size:1rem}
+  .cover-card.you li{border-top:1px solid var(--hairline)}
+  .cover-card li:first-child{border-top:none}
+
+  .explore{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+  .spot{border-left:2px solid var(--gold);padding:.4rem 0 .4rem 1.2rem}
+  .spot h3{font-size:1.1rem;margin-bottom:.3rem}
+  .spot p{font-size:.96rem;opacity:.85}
+
+  /* ---------- forms ---------- */
+  form{max-width:600px;margin:0 auto}
+  .field{margin-bottom:1.3rem}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:560px){.field-row{grid-template-columns:1fr}}
+  label{display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;color:var(--olive)}
+  input[type=text],input[type=email],input[type=number],select,textarea{width:100%;padding:.75rem .9rem;font-family:'EB Garamond',serif;font-size:1.05rem;color:var(--ink);background:#fff;border:1px solid var(--hairline);border-radius:0}
+  section.sand input,section.sand select,section.sand textarea{background:var(--stone)}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--sea);outline-offset:1px}
+  .radio-row{display:flex;gap:1.4rem;padding:.3rem 0;flex-wrap:wrap}
+  .radio-row label{display:flex;align-items:center;gap:.5rem;text-transform:none;letter-spacing:0;font-size:1.05rem;color:var(--ink);margin:0;cursor:pointer}
+  .radio-row input{accent-color:var(--sea);width:1.05rem;height:1.05rem}
+  form .btn{width:100%;text-align:center;margin-top:.4rem}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+  .form-note{text-align:center;font-size:.92rem;color:var(--olive);margin-top:1rem}
+  .form-status{margin-top:1.2rem;text-align:center;font-size:1.05rem;display:none;padding:.9rem;border:1px solid var(--hairline)}
+  .form-status.ok{display:block;color:var(--olive);border-color:var(--olive)}
+  .form-status.err{display:block;color:#8a3030;border-color:#8a3030}
+  .form-status.busy{display:block}
+
+  .gift-box{max-width:600px;margin:2.2rem auto 0;text-align:center}
+  details.bank{max-width:600px;margin:1.6rem auto 0;border:1px solid var(--hairline);padding:1rem 1.4rem;background:var(--stone);text-align:left}
+  details.bank summary{cursor:pointer;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem;color:var(--olive)}
+  details.bank dl{margin-top:1rem;display:grid;grid-template-columns:auto 1fr;gap:.4rem 1.2rem;font-size:1rem}
+  details.bank dt{color:var(--olive)}
+
+  .faq{max-width:700px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--hairline);padding:1.1rem 0}
+  .faq summary{cursor:pointer;font-family:var(--display);font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+  .faq summary::after{content:"+";color:var(--gold);font-size:1.3rem;flex-shrink:0}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{margin-top:.7rem;opacity:.88}
+
+  footer{background:var(--ink);color:var(--stone);text-align:center;padding:3.6rem 1.4rem}
+  footer .mono{font-size:1.5rem;color:var(--gold)}
+  footer p{margin-top:.8rem;font-size:.92rem;opacity:.75}
+
+  /* mode switches: elements tagged with data-mode only show in that mode */
+  [data-mode]{display:none}
+  body.mode-savethedate [data-mode="savethedate"]{display:block;display:revert}
+  body.mode-rsvp [data-mode="rsvp"]{display:block;display:revert}
+
+  @media print{
+    nav,.countdown,.cta,.burger,.lang{display:none!important}
+    .hero{min-height:auto;color:var(--ink);background:none}
+    .hero::after,.hero .art{display:none}
+    .hero .eyebrow,.hero .place{color:var(--olive)}
+    section{padding:2rem 0;break-inside:avoid}
+    .cover-card.us{background:none;color:var(--ink);border:1px solid var(--hairline)}
+  }
+</style>
+</head>
+<body class="mode-savethedate">
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="mono" href="#top" id="nav-mono">G · M</a>
+    <ul id="menu">
+      <li><a href="#weekend" data-i18n="nav.week">The week</a></li>
+      <li><a href="#travel" data-i18n="nav.travel">Getting there</a></li>
+      <li><a href="#stay" data-i18n="nav.stay">Where to stay</a></li>
+      <li data-mode="savethedate"><a href="#interest" data-i18n="nav.interest">Are you coming?</a></li>
+      <li data-mode="rsvp"><a href="#rsvp">RSVP</a></li>
+      <li data-mode="rsvp"><a href="#gifts" data-i18n="nav.gifts">Gifts</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><button class="lang" id="lang-toggle" type="button" aria-label="Switch language">ΕΛ</button></li>
+    </ul>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="art" id="hero-art" aria-hidden="true">
+    <!-- Illustrated fallback: Lentas at dusk — sky, Libyan Sea, the lion headland. Replaced by a photo if SITE.heroImage is set. -->
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#C4576A"/><stop offset=".22" stop-color="#D9775F"/><stop offset=".40" stop-color="#E9A86A"/><stop offset=".49" stop-color="#F2D28E"/><stop offset="1" stop-color="#F6E3B5"/>
+        </linearGradient>
+        <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#5C86A0"/><stop offset="1" stop-color="#16344A"/>
+        </linearGradient>
+        <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3D4B5A"/><stop offset="1" stop-color="#1D3244"/>
+        </linearGradient>
+        <radialGradient id="sunG" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#FFF1CC"/><stop offset=".6" stop-color="#F4C27A"/><stop offset="1" stop-color="#F4C27A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <circle cx="330" cy="435" r="160" fill="url(#sunG)" opacity=".9"/>
+      <circle cx="330" cy="435" r="42" fill="#FFE8B8"/>
+      <!-- sea -->
+      <!-- the sea: geometric bands in Libyan-sea blues -->
+      <rect x="0" y="443" width="1600" height="457" fill="#4A3A66"/>
+      <polygon points="0,443 1600,443 1600,470 0,486" fill="#7FB59C"/>
+      <polygon points="0,486 1600,470 1600,528 0,514" fill="#4F978E"/>
+      <polygon points="0,514 1600,528 1600,560 0,590" fill="#3E7F8C"/>
+      <polygon points="0,590 1600,560 1600,640 0,626" fill="#33647E"/>
+      <polygon points="0,626 1600,640 1600,690 0,724" fill="#2F4F7A"/>
+      <polygon points="0,724 1600,690 1600,790 0,806" fill="#3F416E"/>
+      <polygon points="0,806 1600,790 1600,900 0,900" fill="#16344A"/>
+      <!-- sun path on the water -->
+      <polygon points="300,443 360,443 420,514 250,514" fill="#F4C27A" opacity=".22"/>
+      <polygon points="260,514 410,514 460,590 210,590" fill="#F4C27A" opacity=".12"/>
+      <!-- the lion headland — traced from the view at Levinthos -->
+      <path d="M614 443 L614 443 L629 443 L630 437 L636 431 L641 399 L649 365 L658 354 L663 334 L679 316 L690 279 L699 272 L706 252 L741 230 L768 231 L771 235 L784 238 L797 246 L812 249 L819 258 L834 261 L838 266 L872 275 L886 282 L996 303 L1025 305 L1063 302 L1088 290 L1110 286 L1131 286 L1179 295 L1221 313 L1255 334 L1265 346 L1283 355 L1290 355 L1291 359 L1302 362 L1306 368 L1360 383 L1367 378 L1378 377 L1419 361 L1441 349 L1442 333 L1445 326 L1452 326 L1460 335 L1476 327 L1486 316 L1508 301 L1525 273 L1536 273 L1558 257 L1566 247 L1580 220 L1593 202 L1599 200 L1620 200 L1620 443 Z" fill="url(#hill)"/>
+    </svg>
+  </div>
+  <div class="content">
+    <span class="eyebrow" data-i18n="hero.eyebrow">You are invited to the wedding of</span>
+    <h1><span id="name-1">George</span> <span class="amp">&amp;</span> <span id="name-2">Manos</span></h1>
+    <p class="strap" id="date-line">Monday 6 September 2027</p>
+    <p class="place" id="place-line" data-i18n="hero.place">Lentas · Crete · Greece</p>
+    <div class="cta">
+      <a class="btn" href="#interest" data-mode="savethedate" data-i18n="hero.cta.interest">Tell us if you're coming</a>
+      <a class="btn" href="#rsvp" data-mode="rsvp">RSVP</a>
+      <button class="btn ghost" type="button" id="ics-btn" data-i18n="hero.cta.calendar">Add to calendar</button>
+    </div>
+  </div>
+</header>
+<div class="countbar">
+  <div class="countdown" id="countdown" aria-label="Countdown">
+    <div><b id="cd-d">–</b><span data-i18n="cd.days">days</span></div>
+    <div><b id="cd-h">–</b><span data-i18n="cd.hours">hours</span></div>
+    <div><b id="cd-m">–</b><span data-i18n="cd.minutes">minutes</span></div>
+  </div>
+</div>
+
+<section id="welcome">
+  <div class="wrap narrow">
+    <div class="section-head">
+      <span class="eyebrow">Καλώς ήρθατε</span>
+      <h2 data-i18n="welcome.h">Welcome</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="lede">
+      <p data-mode="savethedate" data-i18n="welcome.std">Consider this your save-the-date. We're getting married on the south coast of Crete, and we'd love you there. Formal invitations and the RSVP will follow in January; for now, everything you need to start planning is on this page — and one small question at the bottom.</p>
+      <p data-mode="rsvp" data-i18n="welcome.p1">We know that joining us means a real journey — flights, ferries, time off work — and we're so grateful you're considering it. This page holds everything you need to plan the trip: the week's schedule, how to get to Crete, where to stay, and what we've taken care of for you.</p>
+      <p data-i18n="welcome.p2">If anything is unclear, write to us any time at <a href="mailto:hello@example.com" class="contact-email">hello@example.com</a>. We'd rather answer a hundred questions than have you stressed.</p>
+    </div>
+    <p class="legend" data-i18n="welcome.legend">Legend says an African queen who loved this shore turned her animals to stone to guard it forever. The lion became the headland that gives Lentas its name — and we'll be celebrating under his gaze.</p>
+  </div>
+</section>
+
+<section id="weekend" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="week.eyebrow">Three days of celebration — and we're there all week</span>
+      <h2 data-i18n="week.h">The week</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="days">
+      <div class="day">
+        <span class="daylabel" data-i18n="week.d1.label">Sunday · 5 September</span>
+        <h3 data-i18n="week.d1.h">Welcome evening</h3>
+        <ul>
+          <li><time>7:30 pm</time><div data-i18n="week.d1.a">Drinks &amp; meze at Levinthos</div></li>
+          <li><time>10:00 pm</time><div data-i18n="week.d1.b">Early night — you'll want it</div></li>
+        </ul>
+        <p class="note" data-i18n="week.d1.note">Casual. Come as you are, meet everyone before the big day. Hosted by us.</p>
+      </div>
+      <div class="day">
+        <span class="daylabel" data-i18n="week.d2.label">Monday · 6 September</span>
+        <h3 data-i18n="week.d2.h">The wedding</h3>
+        <ul>
+          <li><time>6:30 pm</time><div data-i18n="week.d2.a">Guests arrive — Levinthos, Lentas</div></li>
+          <li><time>7:00 pm</time><div data-i18n="week.d2.b">Ceremony</div></li>
+          <li><time>7:40 pm</time><div data-i18n="week.d2.c">Sunset over the Libyan Sea — drinks &amp; photographs</div></li>
+          <li><time>8:45 pm</time><div data-i18n="week.d2.d">Dinner &amp; speeches</div></li>
+          <li><time>10:30 pm</time><div data-i18n="week.d2.e">Live music</div></li>
+          <li><time>11:30 pm</time><div data-i18n="week.d2.f">Dancing until we drop</div></li>
+        </ul>
+        <p class="note" data-i18n="week.d2.note">Timed for the light: the ceremony ends as the sun goes down over the Libyan Sea, and the photographs happen in the glow. Please be seated by 6:50 — the sun won't wait. The venue is a short walk from the village — stroll down, stroll home.</p>
+      </div>
+      <div class="day">
+        <span class="daylabel" data-i18n="week.d3.label">Tuesday · 7 September</span>
+        <h3 data-i18n="week.d3.h">Farewell lunch</h3>
+        <ul>
+          <li><time>1:00 pm</time><div data-i18n="week.d3.a">Long lazy lunch by the water</div></li>
+          <li><time>4:00 pm</time><div data-i18n="week.d3.b">Swim, siesta, safe travels</div></li>
+        </ul>
+        <p class="note" data-i18n="week.d3.note">Optional and unhurried — drop in whenever you surface. Hosted by us.</p>
+      </div>
+    </div>
+    <p class="weekbar" data-i18n="week.bar">We'll be in Lentas the whole week, <strong>Saturday 4 to Saturday 11 September</strong>. Arrive Saturday or Sunday if you can, and if you'd like to make a holiday of it, stay on — we'd love the company. Accommodation options are below.</p>
+  </div>
+</section>
+
+<section id="travel">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="travel.eyebrow">Getting there</span>
+      <h2 data-i18n="travel.h">Travel to Crete</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+      <div class="info-card">
+        <h3 data-i18n="travel.fly.h">Flying in <span class="tag">Heraklion (HER)</span></h3>
+        <p data-i18n="travel.fly.p">Heraklion is your airport — Lentas sits about 75 km south, an hour and three-quarters' drive through the Asterousia mountains. Chania (CHQ) is technically an option but adds three hours of driving; don't.</p>
+        <ul>
+          <li data-i18n="travel.fly.l1"><strong>easyJet</strong> and <strong>Jet2</strong> both fly direct to Heraklion through September — easyJet from Edinburgh, Gatwick, Luton, Manchester and Bristol; Jet2 from Edinburgh, Glasgow, Manchester, Leeds Bradford, Birmingham and Stansted.</li>
+          <li data-i18n="travel.fly.l2">Both release seats about a year ahead — September 2027 dates go on sale over the coming weeks, so book as soon as they appear. Jet2 fares include bags; easyJet is cheaper stripped back.</li>
+          <li data-i18n="travel.fly.l3">Year-round connections via Athens (ATH) with Aegean or SKY Express — under an hour for the hop.</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3 data-i18n="travel.land.h">Once you land</h3>
+        <p data-i18n="travel.land.p1"><strong>Hiring a car is the way</strong> — Lentas is a beautifully remote fishing village and the drive down (via Agioi Deka) is half the experience. Book ahead; UK licences are accepted.</p>
+        <p data-i18n="travel.land.p2"><strong>Prefer not to drive?</strong> Once you're in Lentas, everything is on foot. Taxis to and from Lentas can be arranged, but it's remote enough that they're more faff than they're usually worth; if you're not hiring a car, tell us and we'll pair you with someone who is.</p>
+      </div>
+      <div class="info-card">
+        <h3 data-i18n="travel.prac.h">Practicalities</h3>
+        <dl class="kv">
+          <dt data-i18n="travel.prac.k1">Passport</dt><dd data-i18n="travel.prac.v1">UK visitors: no visa for stays under 90 days; passport valid 3+ months beyond your return</dd>
+          <dt data-i18n="travel.prac.k2">Currency</dt><dd data-i18n="travel.prac.v2">Euro — cards accepted nearly everywhere, but carry some cash for tavernas</dd>
+          <dt data-i18n="travel.prac.k3">Language</dt><dd data-i18n="travel.prac.v3">Greek; English widely spoken. "Yamas!" (cheers) will get you far</dd>
+          <dt data-i18n="travel.prac.k4">Weather</dt><dd data-i18n="travel.prac.v4">Early September: 26–29 °C, sunny, warm evenings — and the sea at its warmest all year</dd>
+          <dt data-i18n="travel.prac.k5">Plugs</dt><dd data-i18n="travel.prac.v5">Type C/F (European two-pin) — bring an adapter</dd>
+        </dl>
+      </div>
+      <div class="info-card">
+        <h3 data-i18n="travel.week.h">Make a holiday of it <span class="tag">4–11 September</span></h3>
+        <p data-i18n="travel.week.p1">We'll be in Lentas the full week, and it's a wonderful base for doing very little: swimming, long lunches, and the odd drive out to Matala, Phaistos or the Agiofarago gorge.</p>
+        <p data-i18n="travel.week.p2">Stay as long as suits you — we'll seed a few loose day trips and leave the rest gloriously unplanned.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="covered" class="sand">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="cover.eyebrow">So there's no awkwardness</span>
+      <h2 data-i18n="cover.h">Who covers what</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="covers">
+      <div class="cover-card us">
+        <h3 data-i18n="cover.us.h">Our treat</h3>
+        <ul>
+          <li data-i18n="cover.us.1">Welcome evening — all food &amp; drink</li>
+          <li data-i18n="cover.us.2">The wedding day — everything, obviously</li>
+          <li data-i18n="cover.us.3">Farewell lunch on Tuesday</li>
+          <li data-i18n="cover.us.4">Holding and booking the Philoxenia rooms for you</li>
+          <li data-i18n="cover.us.5">Matchmaking lifts for non-drivers</li>
+        </ul>
+      </div>
+      <div class="cover-card you">
+        <h3 data-i18n="cover.you.h">Yours to book</h3>
+        <ul>
+          <li data-i18n="cover.you.1">Flights to Crete</li>
+          <li data-i18n="cover.you.2">Accommodation — options at every budget below</li>
+          <li data-i18n="cover.you.3">Meals outside the hosted events</li>
+          <li data-i18n="cover.you.4">Car hire, if you'd like one</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:2.4rem;font-size:1.05rem"><em data-i18n="cover.soft">Please don't let cost quietly keep you away. If travelling is a stretch, talk to us — we mean it.</em></p>
+  </div>
+</section>
+
+<section id="stay" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="stay.eyebrow">Where to stay</span>
+      <h2 data-i18n="stay.h">Accommodation</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="info-card">
+        <h3>Philoxenia <span class="tag" data-i18n="stay.phil.tag">Book through us</span></h3>
+        <p class="price" data-i18n="stay.phil.price">€40–60 / room / night</p>
+        <p data-i18n="stay.phil.p">A short walk from the venue, and the simplest option: we're holding all the rooms here. Five rooms (two people, up to three or four for families) and four studios (one or two people). Tell us on the form how many nights you'd like and we'll sort it — you settle up with us.</p>
+      </div>
+      <div class="info-card">
+        <h3>Levinthos <span class="tag" data-i18n="stay.lev.tag">Venue · from Tue 7th</span></h3>
+        <p class="price" data-i18n="stay.lev.price">Ask us</p>
+        <p data-i18n="stay.lev.p">The venue's own rooms are taken by family and the wedding party until <strong>Tuesday 7 September</strong>. If you're staying on past that, a few suites and apartments free up — worth asking if you fancy a few nights right on the water.</p>
+      </div>
+      <div class="info-card">
+        <h3 data-i18n="stay.vil.h">Lentas village <span class="tag">Book direct</span></h3>
+        <p class="price" data-i18n="stay.vil.price">From €40 / night</p>
+        <p data-i18n="stay.vil.p">The village has plenty of family-run studios and rooms, all within a short and lovely walk of the venue:</p>
+        <ul>
+          <li><strong>Mythos Studios</strong> — <span data-i18n="stay.vil.1">bright modern studios with sea views and a taverna below</span></li>
+          <li><strong>Villa Nostalgia</strong> — <span data-i18n="stay.vil.2">seaview rooms, warm hosts, minutes from the beach</span></li>
+          <li><strong>Anna Studios</strong> — <span data-i18n="stay.vil.3">spotless studios with kitchenettes, central to the village</span></li>
+          <li><strong>Athina Residence</strong> — <span data-i18n="stay.vil.4">simple, well-placed rooms in a quiet alley</span></li>
+          <li><strong>Studios Gaitani</strong>, <strong>Panorama Lentas</strong> — <span data-i18n="stay.vil.5">small, friendly, good value</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="weekbar" data-mode="rsvp" data-i18n="stay.bookby">Lentas is a small village and early September is still busy — please book by <strong id="book-by-date">1 April 2027</strong>. Tell us where you land on the RSVP and we'll help anyone who gets stuck.</p>
+    <p class="weekbar" data-mode="savethedate" data-i18n="stay.std">No need to book rooms yet — flights first. We'll open room requests with the invitations in January.</p>
+  </div>
+</section>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="explore.eyebrow">Our island</span>
+      <h2 data-i18n="explore.h">Explore Crete</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="explore">
+      <div class="spot"><h3 data-i18n="explore.1.h">The queen's stone menagerie</h3><p data-i18n="explore.1.p">Find all three petrified guardians: the lion headland above the village, the elephant rock on the coastal path east, and the crocodile of Cape Trafoulas beyond. Below the lion lie the ruins of ancient Lebena and its healing sanctuary of Asclepius.</p></div>
+      <div class="spot"><h3 data-i18n="explore.2.h">Matala &amp; the beaches</h3><p data-i18n="explore.2.p">The famous cave-carved bay is under an hour away; closer still, Trachoulas and Diskos reward a short drive and scramble.</p></div>
+      <div class="spot"><h3 data-i18n="explore.3.h">Gortyn &amp; Phaistos</h3><p data-i18n="explore.3.p">Roman capital of Crete and a great Minoan palace, both on the road down from Heraklion — stop en route.</p></div>
+      <div class="spot"><h3 data-i18n="explore.4.h">Heraklion &amp; Knossos</h3><p data-i18n="explore.4.p">The archaeological museum and the palace of the Minotaur's labyrinth — a good day out, or a stop on the way home.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAVE-THE-DATE MODE: interest form ============ -->
+<section id="interest" class="sand" data-mode="savethedate">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="interest.eyebrow">One small question</span>
+      <h2 data-i18n="interest.h">Are you likely to come?</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <p class="lede" style="margin-bottom:2.4rem" data-i18n="interest.lede">Not an RSVP — just a feeling. It helps us enormously with rooms, and you can change your mind any time.</p>
+    <form id="interest-form" novalidate>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="phase" value="interest">
+      <div class="field"><label for="i-name" data-i18n="form.name">Your name(s)</label><input type="text" id="i-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="i-email" data-i18n="form.email">Email</label><input type="email" id="i-email" name="email" required autocomplete="email"></div>
+      <div class="field">
+        <label data-i18n="interest.q">Will you be there?</label>
+        <div class="radio-row">
+          <label><input type="radio" name="likely" value="Yes" required> <span data-i18n="interest.yes">Yes, count us in</span></label>
+          <label><input type="radio" name="likely" value="Maybe"> <span data-i18n="interest.maybe">Probably</span></label>
+          <label><input type="radio" name="likely" value="No"> <span data-i18n="interest.no">Unlikely</span></label>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="i-guests" data-i18n="form.guests">How many of you?</label><input type="number" id="i-guests" name="guests" min="1" max="6" value="2"></div>
+        <div class="field">
+          <label data-i18n="interest.room">Rooms</label>
+          <div class="radio-row" style="padding-top:.55rem"><label><input type="checkbox" name="room"> <span data-i18n="interest.roomlabel">I'd like a Philoxenia room via you</span></label></div>
+        </div>
+      </div>
+      <div class="field"><label for="i-msg" data-i18n="form.msg">Anything else (optional)</label><textarea id="i-msg" name="message" rows="2"></textarea></div>
+      <button class="btn dark" type="submit" data-i18n="interest.send">Send</button>
+      <p class="form-status" id="interest-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ RSVP MODE: full form ============ -->
+<section id="rsvp" class="sand" data-mode="rsvp">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span data-i18n="rsvp.by">Kindly reply by</span> <span id="rsvp-deadline">1 March 2027</span></span>
+      <h2>RSVP</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <form id="rsvp-form" novalidate>
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="phase" value="rsvp">
+      <div class="field"><label for="f-name" data-i18n="form.name">Your name(s)</label><input type="text" id="f-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="f-email" data-i18n="form.email">Email</label><input type="email" id="f-email" name="email" required autocomplete="email"></div>
+      <div class="field">
+        <label data-i18n="rsvp.q">Will you be joining us in Crete?</label>
+        <div class="radio-row" role="radiogroup">
+          <label><input type="radio" name="attending" value="Joyfully accepts" required> <span data-i18n="rsvp.yes">Joyfully accept</span></label>
+          <label><input type="radio" name="attending" value="Regretfully declines"> <span data-i18n="rsvp.no">Regretfully decline</span></label>
+        </div>
+      </div>
+      <div class="field" id="edinburgh-field" hidden>
+        <label data-i18n="rsvp.miss">We'll miss you in Crete!</label>
+        <div class="radio-row"><label><input type="checkbox" name="edinburgh" value="Keep me posted"> <span data-i18n="rsvp.edin">We're planning an informal celebration in Edinburgh later in the year — keep me posted</span></label></div>
+      </div>
+      <div class="field">
+        <label data-i18n="rsvp.events">Which events will you attend?</label>
+        <div class="radio-row">
+          <label><input type="checkbox" name="events" value="Sunday welcome"> <span data-i18n="rsvp.e1">Sunday welcome</span></label>
+          <label><input type="checkbox" name="events" value="Monday wedding" checked> <span data-i18n="rsvp.e2">Monday wedding</span></label>
+          <label><input type="checkbox" name="events" value="Tuesday lunch"> <span data-i18n="rsvp.e3">Tuesday lunch</span></label>
+          <label><input type="checkbox" name="events" value="Staying the week"> <span data-i18n="rsvp.e4">Staying the week</span></label>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="f-guests" data-i18n="rsvp.party">Guests in your party</label><input type="number" id="f-guests" name="guests" min="1" max="6" value="1"></div>
+        <div class="field"><label for="f-stay" data-i18n="rsvp.stay">Where are you staying?</label><input type="text" id="f-stay" name="staying"></div>
+      </div>
+      <div class="field"><label for="f-nights" data-i18n="rsvp.nights">If you'd like us to book a Philoxenia room, which nights?</label><input type="text" id="f-nights" name="nights" placeholder="e.g. Sat 4 – Tue 7 September"></div>
+      <div class="field"><label for="f-diet" data-i18n="rsvp.diet">Dietary requirements</label><input type="text" id="f-diet" name="dietary"></div>
+      <div class="field">
+        <div class="radio-row"><label><input type="checkbox" name="lift"> <span data-i18n="rsvp.lift">We won't have a car — please pair us with someone who does</span></label></div>
+      </div>
+      <div class="field"><label for="f-song" data-i18n="rsvp.song">A song that will get you on the dance floor</label><input type="text" id="f-song" name="song"></div>
+      <div class="field"><label for="f-msg" data-i18n="rsvp.msg">A message for us (optional)</label><textarea id="f-msg" name="message" rows="3"></textarea></div>
+      <button class="btn dark" type="submit" data-i18n="rsvp.send">Send RSVP</button>
+      <p class="form-status" id="rsvp-status" role="status"></p>
+      <p class="form-note" data-i18n="rsvp.trouble">Trouble with the form? Email us at <a href="mailto:hello@example.com" class="contact-email">hello@example.com</a>.</p>
+    </form>
+  </div>
+</section>
+
+<section id="gifts" class="alt" data-mode="rsvp">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="gifts.eyebrow">Truly</span>
+      <h2 data-i18n="gifts.h">Your presence is the present</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="lede">
+      <p data-i18n="gifts.p1">You are crossing seas and taking time off to be with us — that is the gift, and we don't expect anything more. Please, no boxes on the plane.</p>
+      <p data-i18n="gifts.p2">If you'd nonetheless like to mark the day, a small contribution towards our honeymoon would be very kindly received — but we mean it when we say it's entirely optional.</p>
+    </div>
+    <div class="gift-box">
+      <a class="btn" id="paypal-btn" href="https://paypal.me/YOURHANDLE" target="_blank" rel="noopener" data-i18n="gifts.paypal">Contribute via PayPal</a>
+      <details class="bank" id="bank-details">
+        <summary data-i18n="gifts.bank">Prefer a bank transfer?</summary>
+        <dl><dt data-i18n="gifts.b1">Name</dt><dd id="bank-name">…</dd><dt data-i18n="gifts.b2">Sort code</dt><dd id="bank-sort">…</dd><dt data-i18n="gifts.b3">Account</dt><dd id="bank-account">…</dd><dt data-i18n="gifts.b4">Reference</dt><dd data-i18n="gifts.b5">Your name</dd></dl>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="faq.eyebrow">Good questions</span>
+      <h2>FAQ</h2>
+      <div class="meander" aria-hidden="true"></div>
+    </div>
+    <div class="faq">
+      <details><summary data-i18n="faq.1.q">What should I wear?</summary><p data-i18n="faq.1.a"><strong>Summer fabulous.</strong> Linen, colour, a good hat, the shirt you've been saving — dress like the photographs will be looked at for fifty years, but stay cool enough to dance at midnight. The ceremony is outdoors on stone above the Libyan Sea, so choose footwear accordingly. Kilts enthusiastically welcomed; you will not be the only one.</p></details>
+      <details><summary data-i18n="faq.2.q">Why a Monday?</summary><p data-i18n="faq.2.a">Because the venue is ours for the whole week, and a Monday wedding lets you fly in on the Saturday, settle for a day, and still have the rest of the week ahead of you rather than behind you. Take the Monday and Tuesday off; you'll thank us.</p></details>
+      <details><summary data-i18n="faq.3.q">How hot will it be, really?</summary><p data-i18n="faq.3.a">Early September days reach 26–29 °C with strong sun; evenings settle to a lovely 21–23 °C. The ceremony runs in the evening for exactly this reason. The sea is at its warmest all year — bring swimmers.</p></details>
+      <details><summary data-i18n="faq.4.q">Do I need to come to all three days?</summary><p data-i18n="faq.4.a">Not at all. The Monday is the heart of it; Sunday and Tuesday are there so that a long journey buys more than one evening together.</p></details>
+      <details><summary data-i18n="faq.5.q">Can I bring a plus one?</summary><p data-i18n="faq.5.a">Your invitation names everyone in your party. If your circumstances have changed, just write to us — we'll do our best.</p></details>
+      <details><summary data-i18n="faq.6.q">Are children welcome?</summary><p data-i18n="faq.6.a">It's an adults' evening at heart — a late ceremony, a long dinner and a very late party. Children aren't banned: if yours truly can't be left, they're welcome and we'll make sure they're fed and looked after. But if you can arrange for them to stay home, we'd gently encourage it — and you'll enjoy the raki more.</p></details>
+      <details><summary data-i18n="faq.7.q">I don't speak Greek — will I manage?</summary><p data-i18n="faq.7.a">Completely. English is spoken everywhere tourists go in Crete, menus are bilingual, and half the wedding party will happily translate the other half's speeches.</p></details>
+      <details><summary data-i18n="faq.8.q">What if flights or plans fall through?</summary><p data-i18n="faq.8.a">Things happen, especially with international travel. Tell us as soon as you know and we'll adjust — no guilt, ever. Travel insurance is strongly recommended when you book.</p></details>
+      <details data-mode="rsvp"><summary data-i18n="faq.9.q">Who do I contact on the day?</summary><p data-i18n="faq.9.a">[Name], our on-the-day coordinator: [phone]. Please don't call the grooms — they'll be busy panicking about cufflinks.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="mono" id="footer-mono">G · M</span>
+  <p data-i18n="footer.p">We can't wait to share Crete with you.</p>
+  <p id="footer-date">6 · 9 · 2027</p>
+</footer>
+
+<script>
+/* ============================================================
+   EDIT EVERYTHING HERE
+   ============================================================ */
+const SITE = {
+  mode: "savethedate",          // "savethedate" now → "rsvp" when invitations go out
+  name1: { en: "George", el: "Γιώργος" }, name2: { en: "Manos", el: "Μάνος" }, monogram: "G · M",
+  dateLine: { en: "Monday 6 September 2027", el: "Δευτέρα 6 Σεπτεμβρίου 2027" },
+  weddingDateISO: "2027-09-06T19:00:00+03:00",
+  weddingEndISO:  "2027-09-07T01:00:00+03:00",
+  rsvpDeadline: { en: "1 March 2027", el: "1 Μαρτίου 2027" },
+  bookByDate:   { en: "1 April 2027", el: "1 Απριλίου 2027" },
+  contactEmail: "hello@example.com",
+  heroImage: "hero-watercolour.png",   // the watercolour, next to index.html; set "" to fall back to the SVG illustration
+  rsvpEndpoint: "https://wedding-rsvp.YOUR-SUBDOMAIN.workers.dev",   // from the Worker README
+  paypal: "https://paypal.me/YOURHANDLE",
+  // Bank details, base64 — run in console: btoa(JSON.stringify({name:"…",sort:"00-00-00",account:"00000000"}))
+  bankEncoded: "eyJuYW1lIjoiW0FjY291bnQgbmFtZV0iLCJzb3J0IjoiWzAwLTAwLTAwXSIsImFjY291bnQiOiJbMDAwMDAwMDBdIn0=",
+  defaultLang: "en"
+};
+
+/* ---------- Greek translations (keys match data-i18n) ---------- */
+const EL = {
+  "nav.week":"Η εβδομάδα","nav.travel":"Πώς θα έρθετε","nav.stay":"Διαμονή","nav.interest":"Θα έρθετε;","nav.gifts":"Δώρα",
+  "hero.eyebrow":"Σας προσκαλούμε στον γάμο μας","hero.place":"Λέντας · Κρήτη",
+  "cd.days":"ημέρες","cd.hours":"ώρες","cd.minutes":"λεπτά",
+  "hero.cta.interest":"Πείτε μας αν θα έρθετε","hero.cta.calendar":"Στο ημερολόγιο",
+  "welcome.h":"Καλώς ήρθατε",
+  "welcome.std":"Αυτό είναι το «κρατήστε την ημερομηνία» μας. Παντρευόμαστε στη νότια Κρήτη και θα θέλαμε πολύ να είστε εκεί. Οι επίσημες προσκλήσεις και η επιβεβαίωση παρουσίας θα σταλούν τον Ιανουάριο· προς το παρόν, εδώ θα βρείτε ό,τι χρειάζεστε για να αρχίσετε τον προγραμματισμό — και μια μικρή ερώτηση στο τέλος.",
+  "welcome.p1":"Ξέρουμε ότι το να έρθετε σημαίνει ταξίδι — πτήσεις, άδεια από τη δουλειά — και σας ευγνωμονούμε που το σκέφτεστε. Εδώ θα βρείτε ό,τι χρειάζεστε: το πρόγραμμα της εβδομάδας, πώς θα φτάσετε, πού θα μείνετε και τι έχουμε φροντίσει εμείς.",
+  "welcome.p2":"Για οτιδήποτε, γράψτε μας στο <a href=\"mailto:hello@example.com\" class=\"contact-email\">hello@example.com</a>. Προτιμούμε να απαντήσουμε εκατό ερωτήσεις παρά να αγχωθείτε.",
+  "welcome.legend":"Λέει ο θρύλος πως μια βασίλισσα από την Αφρική, που αγάπησε αυτή την ακτή, πέτρωσε τα ζώα της για να τη φυλάνε για πάντα. Το λιοντάρι έγινε ο βράχος που έδωσε το όνομά του στον Λέντα — και θα γιορτάσουμε κάτω από το βλέμμα του.",
+  "week.eyebrow":"Τρεις μέρες γιορτής — κι εμείς εκεί όλη την εβδομάδα","week.h":"Η εβδομάδα",
+  "week.d1.label":"Κυριακή · 5 Σεπτεμβρίου","week.d1.h":"Βραδιά καλωσορίσματος","week.d1.a":"Ποτά και μεζέδες στον Λέβυνθο","week.d1.b":"Νωρίς για ύπνο — θα το χρειαστείτε","week.d1.note":"Χαλαρά. Ελάτε όπως είστε, γνωριστείτε με όλους πριν τη μεγάλη μέρα. Κερνάμε εμείς.",
+  "week.d2.label":"Δευτέρα · 6 Σεπτεμβρίου","week.d2.h":"Ο γάμος","week.d2.a":"Άφιξη καλεσμένων — Λέβυνθος, Λέντας","week.d2.b":"Τελετή","week.d2.c":"Ηλιοβασίλεμα πάνω από το Λιβυκό — ποτά και φωτογραφίες","week.d2.d":"Δείπνο και λόγοι","week.d2.e":"Ζωντανή μουσική","week.d2.f":"Χορός μέχρι τελικής πτώσης",
+  "week.d2.note":"Με το φως: η τελετή τελειώνει καθώς ο ήλιος δύει πάνω από το Λιβυκό, και οι φωτογραφίες γίνονται στη χρυσή ώρα. Παρακαλούμε να έχετε καθίσει μέχρι τις 6:50 — ο ήλιος δεν περιμένει. Ο χώρος είναι μια μικρή βόλτα από το χωριό — έρχεστε και γυρνάτε με τα πόδια.",
+  "week.d3.label":"Τρίτη · 7 Σεπτεμβρίου","week.d3.h":"Αποχαιρετιστήριο γεύμα","week.d3.a":"Μεγάλο, νωχελικό τραπέζι δίπλα στη θάλασσα","week.d3.b":"Μπάνιο, σιέστα, καλό ταξίδι","week.d3.note":"Προαιρετικό και χωρίς βιασύνη — ελάτε όποτε ξυπνήσετε. Κερνάμε εμείς.",
+  "week.bar":"Θα είμαστε στον Λέντα όλη την εβδομάδα, <strong>Σάββατο 4 έως Σάββατο 11 Σεπτεμβρίου</strong>. Ελάτε Σάββατο ή Κυριακή αν μπορείτε, κι αν θέλετε να το συνδυάσετε με διακοπές, μείνετε — θα χαρούμε την παρέα. Οι επιλογές διαμονής παρακάτω.",
+  "travel.eyebrow":"Πώς θα έρθετε","travel.h":"Ταξίδι στην Κρήτη",
+  "travel.fly.h":"Πτήσεις <span class=\"tag\">Ηράκλειο (HER)</span>",
+  "travel.fly.p":"Το αεροδρόμιό σας είναι το Ηράκλειο — ο Λέντας είναι περίπου 75 χλμ. νότια, μιάμιση με δύο ώρες μέσα από τα Αστερούσια. Τα Χανιά είναι τεχνικά επιλογή, αλλά προσθέτουν τρεις ώρες οδήγηση.",
+  "travel.fly.l1":"Από Ελλάδα: Aegean, SKY Express και Olympic πετούν Αθήνα–Ηράκλειο πολλές φορές τη μέρα· υπάρχει και το πλοίο από τον Πειραιά (Minoan, ANEK) για όσους θέλουν αυτοκίνητο.",
+  "travel.fly.l2":"Από το Ηνωμένο Βασίλειο πετούν απευθείας easyJet και Jet2 όλο τον Σεπτέμβριο.",
+  "travel.fly.l3":"Κλείστε νωρίς — ο Σεπτέμβριος είναι ακόμα γεμάτος.",
+  "travel.land.h":"Μόλις φτάσετε",
+  "travel.land.p1":"<strong>Το αυτοκίνητο είναι ο τρόπος</strong> — ο Λέντας είναι ένα όμορφα απομονωμένο ψαροχώρι και η διαδρομή (μέσω Αγίων Δέκα) είναι η μισή εμπειρία.",
+  "travel.land.p2":"<strong>Χωρίς αυτοκίνητο;</strong> Μέσα στον Λέντα όλα είναι με τα πόδια. Ταξί μπορεί να κανονιστεί, αλλά είναι αρκετά μακριά ώστε να μην αξίζει τον κόπο· αν δεν θα έχετε αυτοκίνητο, πείτε το μας και θα σας βρούμε παρέα με κάποιον που θα έχει.",
+  "travel.prac.h":"Πρακτικά","travel.prac.k1":"Ταυτότητα","travel.prac.v1":"Αστυνομική ταυτότητα ή διαβατήριο για την πτήση","travel.prac.k2":"Πληρωμές","travel.prac.v2":"Κάρτες σχεδόν παντού, αλλά έχετε και μετρητά για τις ταβέρνες","travel.prac.k3":"Γλώσσα","travel.prac.v3":"Ελληνικά και αγγλικά — οι μισοί καλεσμένοι θα μεταφράζουν στους άλλους μισούς","travel.prac.k4":"Καιρός","travel.prac.v4":"Αρχές Σεπτεμβρίου: 26–29 °C, ήλιος, ζεστά βράδια — και η θάλασσα στην καλύτερή της","travel.prac.k5":"Θάλασσα","travel.prac.v5":"Φέρτε μαγιό. Σοβαρά.",
+  "travel.week.h":"Συνδυάστε το με διακοπές <span class=\"tag\">4–11 Σεπτεμβρίου</span>",
+  "travel.week.p1":"Θα είμαστε στον Λέντα όλη την εβδομάδα, και είναι ιδανική βάση για να μην κάνετε τίποτα: μπάνια, μεγάλα τραπέζια, και καμιά εκδρομή στα Μάταλα, τη Φαιστό ή το φαράγγι του Αγιοφάραγγου.",
+  "travel.week.p2":"Μείνετε όσο σας βολεύει — θα οργανώσουμε λίγες χαλαρές εκδρομές και θα αφήσουμε τα υπόλοιπα ελεύθερα.",
+  "cover.eyebrow":"Για να μην υπάρχει αμηχανία","cover.h":"Ποιος πληρώνει τι","cover.us.h":"Κερνάμε εμείς",
+  "cover.us.1":"Βραδιά καλωσορίσματος — φαγητό και ποτό","cover.us.2":"Η μέρα του γάμου — όλα, προφανώς","cover.us.3":"Το αποχαιρετιστήριο γεύμα της Τρίτης","cover.us.4":"Κρατάμε και κλείνουμε τα δωμάτια της Φιλοξενίας για εσάς","cover.us.5":"Βρίσκουμε παρέα με αυτοκίνητο σε όσους δεν έχουν",
+  "cover.you.h":"Δικά σας","cover.you.1":"Πτήσεις / εισιτήρια","cover.you.2":"Διαμονή — επιλογές για κάθε πορτοφόλι παρακάτω","cover.you.3":"Γεύματα εκτός των εκδηλώσεων","cover.you.4":"Ενοικίαση αυτοκινήτου, αν θέλετε",
+  "cover.soft":"Μην αφήσετε το κόστος να σας κρατήσει μακριά. Αν το ταξίδι είναι δύσκολο, μιλήστε μας — το εννοούμε.",
+  "stay.eyebrow":"Πού θα μείνετε","stay.h":"Διαμονή","stay.phil.tag":"Μέσω εμάς","stay.phil.price":"€40–60 / δωμάτιο / βράδυ",
+  "stay.phil.p":"Δίπλα στον χώρο, και η πιο απλή επιλογή: κρατάμε όλα τα δωμάτια. Πέντε δωμάτια (για δύο, έως τρία ή τέσσερα για οικογένειες) και τέσσερα στούντιο (για ένα ή δύο άτομα). Πείτε μας στη φόρμα πόσες νύχτες θέλετε και το κανονίζουμε — τακτοποιείτε μαζί μας.",
+  "stay.lev.tag":"Ο χώρος · από Τρίτη 7","stay.lev.price":"Ρωτήστε μας",
+  "stay.lev.p":"Τα δωμάτια του Λέβυνθου είναι πιασμένα από την οικογένεια μέχρι την <strong>Τρίτη 7 Σεπτεμβρίου</strong>. Αν μένετε παραπάνω, ελευθερώνονται κάποιες σουίτες και διαμερίσματα πάνω στη θάλασσα — ρωτήστε μας.",
+  "stay.vil.h":"Χωριό Λέντας <span class=\"tag\">Απευθείας</span>","stay.vil.price":"Από €40 / βράδυ",
+  "stay.vil.p":"Το χωριό έχει αρκετά οικογενειακά ενοικιαζόμενα δωμάτια και στούντιο, όλα λίγα λεπτά με τα πόδια από τον χώρο:",
+  "stay.vil.1":"φωτεινά μοντέρνα στούντιο με θέα θάλασσα και ταβέρνα από κάτω","stay.vil.2":"δωμάτια με θέα, ζεστοί οικοδεσπότες, δίπλα στην παραλία","stay.vil.3":"πεντακάθαρα στούντιο με κουζίνα, στο κέντρο του χωριού","stay.vil.4":"απλά, καλά τοποθετημένα δωμάτια σε ήσυχο σοκάκι","stay.vil.5":"μικρά, φιλικά, καλή τιμή",
+  "stay.bookby":"Ο Λέντας είναι μικρό χωριό και ο Σεπτέμβριος είναι ακόμα γεμάτος — κλείστε μέχρι <strong id=\"book-by-date\">1 Απριλίου 2027</strong>. Πείτε μας στη φόρμα πού θα μείνετε και θα βοηθήσουμε όποιον δυσκολευτεί.",
+  "stay.std":"Δεν χρειάζεται να κλείσετε δωμάτια ακόμα — πρώτα τα εισιτήρια. Θα ανοίξουμε τις κρατήσεις δωματίων με τις προσκλήσεις τον Ιανουάριο.",
+  "explore.eyebrow":"Το νησί μας","explore.h":"Γνωρίστε την Κρήτη",
+  "explore.1.h":"Τα πετρωμένα ζώα της βασίλισσας","explore.1.p":"Βρείτε και τους τρεις φύλακες: το λιοντάρι πάνω από το χωριό, τον ελέφαντα στο μονοπάτι προς τα ανατολικά, και τον κροκόδειλο του ακρωτηρίου Τράφουλα. Κάτω από το λιοντάρι, τα ερείπια της αρχαίας Λεβήνας και το Ασκληπιείο της.",
+  "explore.2.h":"Μάταλα και παραλίες","explore.2.p":"Ο διάσημος κόλπος με τις σπηλιές είναι κάτω από μία ώρα· πιο κοντά, ο Τραχούλας και ο Δίσκος αξίζουν μια μικρή διαδρομή.",
+  "explore.3.h":"Γόρτυνα και Φαιστός","explore.3.p":"Η ρωμαϊκή πρωτεύουσα της Κρήτης και ένα μεγάλο μινωικό ανάκτορο, και τα δύο στον δρόμο από το Ηράκλειο — σταματήστε καθ' οδόν.",
+  "explore.4.h":"Ηράκλειο και Κνωσός","explore.4.p":"Το Αρχαιολογικό Μουσείο και ο λαβύρινθος του Μινώταυρου — μια καλή ημερήσια εκδρομή, ή στάση στην επιστροφή.",
+  "interest.eyebrow":"Μια μικρή ερώτηση","interest.h":"Θα έρθετε, μάλλον;",
+  "interest.lede":"Δεν είναι επιβεβαίωση — απλώς μια αίσθηση. Μας βοηθάει πολύ με τα δωμάτια, και μπορείτε να αλλάξετε γνώμη όποτε θέλετε.",
+  "form.name":"Το όνομά σας","form.email":"Email","form.guests":"Πόσοι είστε;","form.msg":"Κάτι άλλο (προαιρετικό)",
+  "interest.q":"Θα είστε εκεί;","interest.yes":"Ναι, να μας υπολογίζετε","interest.maybe":"Μάλλον","interest.no":"Δύσκολο",
+  "interest.room":"Δωμάτια","interest.roomlabel":"Θα ήθελα δωμάτιο στη Φιλοξενία μέσω εσάς","interest.send":"Αποστολή",
+  "rsvp.by":"Παρακαλούμε απαντήστε έως","rsvp.q":"Θα έρθετε στην Κρήτη;","rsvp.yes":"Με χαρά, ναι","rsvp.no":"Δυστυχώς όχι",
+  "rsvp.miss":"Θα μας λείψετε!","rsvp.edin":"Ετοιμάζουμε μια ανεπίσημη γιορτή στο Εδιμβούργο αργότερα μέσα στη χρονιά — κρατήστε με ενήμερο",
+  "rsvp.events":"Σε ποιες μέρες θα είστε;","rsvp.e1":"Κυριακή καλωσόρισμα","rsvp.e2":"Δευτέρα γάμος","rsvp.e3":"Τρίτη γεύμα","rsvp.e4":"Όλη την εβδομάδα",
+  "rsvp.party":"Πόσα άτομα","rsvp.stay":"Πού θα μείνετε;","rsvp.nights":"Αν θέλετε δωμάτιο στη Φιλοξενία μέσω εμάς, ποιες νύχτες;","rsvp.diet":"Διατροφικές ανάγκες",
+  "rsvp.lift":"Δεν θα έχουμε αυτοκίνητο — βρείτε μας παρέα με κάποιον που θα έχει","rsvp.song":"Ένα τραγούδι που θα σας σηκώσει στην πίστα","rsvp.msg":"Ένα μήνυμα για εμάς (προαιρετικό)","rsvp.send":"Αποστολή",
+  "rsvp.trouble":"Πρόβλημα με τη φόρμα; Γράψτε μας στο <a href=\"mailto:hello@example.com\" class=\"contact-email\">hello@example.com</a>.",
+  "gifts.eyebrow":"Ειλικρινά","gifts.h":"Η παρουσία σας είναι το δώρο",
+  "gifts.p1":"Ταξιδεύετε για να είστε μαζί μας — αυτό είναι το δώρο, και δεν περιμένουμε τίποτα άλλο. Σας παρακαλούμε, όχι κουτιά στο αεροπλάνο.",
+  "gifts.p2":"Αν παρ' όλα αυτά θέλετε να τιμήσετε τη μέρα, μια μικρή συμβολή στο ταξίδι του μέλιτος θα ήταν ευπρόσδεκτη — αλλά το εννοούμε ότι είναι εντελώς προαιρετικό.",
+  "gifts.paypal":"Συμβολή μέσω PayPal","gifts.bank":"Προτιμάτε τραπεζική μεταφορά;","gifts.b1":"Όνομα","gifts.b2":"Sort code","gifts.b3":"Λογαριασμός","gifts.b4":"Αιτιολογία","gifts.b5":"Το όνομά σας",
+  "faq.eyebrow":"Καλές ερωτήσεις",
+  "faq.1.q":"Τι να φορέσω;","faq.1.a":"<strong>Summer fabulous.</strong> Λινά, χρώμα, ένα καλό καπέλο, το πουκάμισο που φυλάτε — ντυθείτε σαν οι φωτογραφίες να κρατήσουν πενήντα χρόνια, αλλά όχι τόσο που να μη χορεύετε τα μεσάνυχτα. Η τελετή είναι σε πέτρα, πάνω από το Λιβυκό — διαλέξτε παπούτσια ανάλογα. Τα σκωτσέζικα κιλτ είναι ευπρόσδεκτα· δεν θα είστε οι μόνοι.",
+  "faq.2.q":"Γιατί Δευτέρα;","faq.2.a":"Επειδή ο χώρος είναι δικός μας όλη την εβδομάδα, και ένας γάμος τη Δευτέρα σημαίνει ότι έρχεστε Σάββατο, ξεκουράζεστε μια μέρα, και έχετε ακόμα την υπόλοιπη εβδομάδα μπροστά σας. Πάρτε άδεια Δευτέρα και Τρίτη — θα μας ευχαριστείτε.",
+  "faq.3.q":"Πόση ζέστη θα κάνει;","faq.3.a":"Αρχές Σεπτεμβρίου: 26–29 °C τη μέρα με δυνατό ήλιο, 21–23 °C τα βράδια. Η τελετή γίνεται απόγευμα ακριβώς γι' αυτό. Η θάλασσα είναι στην πιο ζεστή της — φέρτε μαγιό.",
+  "faq.4.q":"Πρέπει να έρθω και τις τρεις μέρες;","faq.4.a":"Καθόλου. Η Δευτέρα είναι η καρδιά· η Κυριακή και η Τρίτη υπάρχουν για να αξίζει το ταξίδι περισσότερο από ένα βράδυ.",
+  "faq.5.q":"Μπορώ να φέρω συνοδό;","faq.5.a":"Η πρόσκληση αναφέρει όλους όσους περιμένουμε. Αν κάτι άλλαξε, γράψτε μας — θα κάνουμε ό,τι μπορούμε.",
+  "faq.6.q":"Είναι ευπρόσδεκτα τα παιδιά;","faq.6.a":"Είναι κατά βάση μια βραδιά για μεγάλους — αργή τελετή, μεγάλο δείπνο και πολύ αργό γλέντι. Τα παιδιά δεν απαγορεύονται: αν πραγματικά δεν μπορούν να μείνουν αλλού, είναι ευπρόσδεκτα και θα φροντίσουμε να φάνε και να είναι καλά. Αν όμως μπορείτε να τα αφήσετε σπίτι, θα το προτιμούσαμε ευγενικά — και θα απολαύσετε καλύτερα τη ρακή.",
+  "faq.7.q":"Δεν μιλάω αγγλικά — θα τα βγάλω πέρα;","faq.7.a":"Απολύτως. Οι μισοί καλεσμένοι είναι Έλληνες, οι λόγοι θα μεταφράζονται, και ο Μάνος θα είναι εκεί.",
+  "faq.8.q":"Κι αν αλλάξουν τα σχέδια;","faq.8.a":"Συμβαίνει. Πείτε το μας μόλις το μάθετε και θα προσαρμοστούμε — χωρίς ενοχές, ποτέ.",
+  "faq.9.q":"Με ποιον επικοινωνώ την ημέρα;","faq.9.a":"[Όνομα], ο συντονιστής μας: [τηλέφωνο]. Μην πάρετε τους γαμπρούς — θα πανικοβάλλονται με τα μανικετόκουμπα.",
+  "footer.p":"Ανυπομονούμε να μοιραστούμε την Κρήτη μαζί σας."
+};
+
+/* ---------- boot ---------- */
+const EN = {}; // captured from the HTML on first run
+document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.dataset.i18n] = el.innerHTML; });
+
+function setLang(lang){
+  document.documentElement.lang = lang;
+  const dict = lang === 'el' ? EL : EN;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n; if (dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.getElementById('lang-toggle').textContent = lang === 'el' ? 'EN' : 'ΕΛ';
+  document.getElementById('date-line').textContent = SITE.dateLine[lang];
+  document.getElementById('name-1').textContent = SITE.name1[lang];
+  document.getElementById('name-2').textContent = SITE.name2[lang];
+  const rd = document.getElementById('rsvp-deadline'); if (rd) rd.textContent = SITE.rsvpDeadline[lang];
+  document.querySelectorAll('.contact-email').forEach(a => { a.textContent = SITE.contactEmail; a.href = 'mailto:' + SITE.contactEmail; });
+  try { const u = new URL(location); u.searchParams.set('lang', lang); history.replaceState(null, '', u); } catch {}
+}
+document.getElementById('lang-toggle').addEventListener('click', () => setLang(document.documentElement.lang === 'el' ? 'en' : 'el'));
+
+document.body.className = 'mode-' + SITE.mode;
+document.getElementById('nav-mono').textContent = SITE.monogram;
+document.getElementById('footer-mono').textContent = SITE.monogram;
+document.getElementById('paypal-btn').href = SITE.paypal;
+const wd = new Date(SITE.weddingDateISO);
+document.getElementById('footer-date').textContent = wd.getDate() + ' · ' + (wd.getMonth()+1) + ' · ' + wd.getFullYear();
+if (SITE.heroImage) {
+  const art = document.getElementById('hero-art');
+  art.innerHTML = '<img class="art" src="' + SITE.heroImage + '" alt="">';
+}
+let startLang = SITE.defaultLang; try { startLang = new URLSearchParams(location.search).get('lang') || startLang; } catch {}
+setLang(startLang);
+
+/* mobile menu */
+const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+burger.addEventListener('click', () => { const o = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+/* countdown */
+function tick(){
+  const diff = wd - new Date(), cd = document.getElementById('countdown');
+  if (diff <= 0){ cd.innerHTML = '<div><b>\uD83C\uDF89</b></div>'; return; }
+  document.getElementById('cd-d').textContent = Math.floor(diff/86400000);
+  document.getElementById('cd-h').textContent = Math.floor(diff/3600000)%24;
+  document.getElementById('cd-m').textContent = Math.floor(diff/60000)%60;
+}
+tick(); setInterval(tick, 30000);
+
+/* add to calendar (.ics) */
+document.getElementById('ics-btn').addEventListener('click', () => {
+  const f = d => new Date(d).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//wedding//EN','BEGIN:VEVENT',
+    'UID:' + f(SITE.weddingDateISO) + '@wedding', 'DTSTAMP:' + f(new Date()),
+    'DTSTART:' + f(SITE.weddingDateISO), 'DTEND:' + f(SITE.weddingEndISO),
+    'SUMMARY:' + SITE.name1.en + ' & ' + SITE.name2.en + ' — wedding', 'LOCATION:Levinthos\\, Lentas\\, Crete\\, Greece',
+    'DESCRIPTION:' + location.origin + location.pathname, 'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics); a.download = 'wedding.ics'; a.click();
+});
+
+/* forms → Worker */
+async function submitForm(form, statusEl, okMsg){
+  if (!form.reportValidity()) return;
+  if (/YOUR-SUBDOMAIN/.test(SITE.rsvpEndpoint)) {
+    statusEl.className = 'form-status err';
+    statusEl.textContent = 'Form not connected yet — set SITE.rsvpEndpoint to your Worker URL (see rsvp-worker/README.md).';
+    return;
+  }
+  statusEl.className = 'form-status busy'; statusEl.textContent = '…';
+  try {
+    const res = await fetch(SITE.rsvpEndpoint, { method: 'POST', body: new FormData(form) });
+    if (!res.ok) throw new Error();
+    statusEl.className = 'form-status ok'; statusEl.textContent = okMsg[document.documentElement.lang]; form.reset();
+  } catch {
+    statusEl.className = 'form-status err';
+    statusEl.textContent = document.documentElement.lang === 'el'
+      ? 'Κάτι πήγε στραβά. Στείλτε μας email — ' + SITE.contactEmail
+      : 'Something went wrong. Please email us instead — ' + SITE.contactEmail;
+  }
+}
+document.getElementById('interest-form').addEventListener('submit', e => { e.preventDefault();
+  submitForm(e.target, document.getElementById('interest-status'),
+    { en: 'Thank you — that helps more than you know.', el: 'Ευχαριστούμε — βοηθάει περισσότερο απ\u2019 όσο φαντάζεστε.' }); });
+document.getElementById('rsvp-form').addEventListener('submit', e => { e.preventDefault();
+  submitForm(e.target, document.getElementById('rsvp-status'),
+    { en: 'Thank you — your RSVP is in. We can\u2019t wait to see you in Crete.', el: 'Ευχαριστούμε — καταγράψαμε την απάντησή σας. Ανυπομονούμε να σας δούμε στην Κρήτη.' }); });
+
+/* Edinburgh option only for decliners */
+document.querySelectorAll('input[name="attending"]').forEach(r => r.addEventListener('change', () => {
+  document.getElementById('edinburgh-field').hidden =
+    (document.querySelector('input[name="attending"]:checked')?.value !== 'Regretfully declines');
+}));
+
+/* bank details decoded only when opened */
+document.getElementById('bank-details').addEventListener('toggle', function fill(e){
+  if (!e.target.open) return;
+  try { const b = JSON.parse(atob(SITE.bankEncoded));
+    document.getElementById('bank-name').textContent = b.name;
+    document.getElementById('bank-sort').textContent = b.sort;
+    document.getElementById('bank-account').textContent = b.account; } catch {}
+  e.target.removeEventListener('toggle', fill);
+});
+</script>
+</body>
+</html>
