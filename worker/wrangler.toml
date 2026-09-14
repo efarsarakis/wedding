@@ -1,9 +1,0 @@
-name = "wedding-rsvp"
-main = "worker.js"
-compatibility_date = "2026-09-01"
-
-[vars]
-AIRTABLE_BASE  = "appivWbWyQlQqGJTB"
-AIRTABLE_TABLE = "tblfcALpXOklfXfG0"
-GUESTS_TABLE   = "tbllrariezt3kKrsq"
-ALLOWED_ORIGIN = "*"   # tighten to the site's origin once the domain is live

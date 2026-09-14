@@ -9,12 +9,12 @@
  *   AIRTABLE_TABLE   tblfcALpXOklfXfG0            (RSVPs)
  *   GUESTS_TABLE     tbllrariezt3kKrsq            (Guests — one row per person)
  *
- * Routes:
- *   GET  ?lookup=<surname>   → parties whose members match the surname, with each member's id/name/type
- *   POST (phase=interest)    → one row in RSVPs
- *   POST (phase=rsvp)        → one row in RSVPs, plus per-guest RSVP/event ticks on Guests (fields guest_<id>=coming|declined,
+ * Static site is served from ./public by the Workers assets binding; this script only
+ * handles /api/*. Routes:
+ *   GET  /api/lookup?lookup=<surname>   → parties whose members match the surname, with each member's id/name/type
+ *   POST /api/rsvp (phase=interest) → one row in RSVPs
+ *   POST /api/rsvp (phase=rsvp)        → one row in RSVPs, plus per-guest RSVP/event ticks on Guests (fields guest_<id>=coming|declined,
  *                              ev_<id>=Sunday welcome|Monday wedding|Tuesday lunch, repeated)
- *   ALLOWED_ORIGIN   https://wedding.farsarakis.com  (CORS — the site's origin)
  */
 
 // Form field name → Airtable field ID. IDs are stable even if you rename fields.
@@ -36,7 +36,7 @@ const FIELD = {
 };
 
 const cors = (env) => ({
-  "Access-Control-Allow-Origin": env.ALLOWED_ORIGIN || "*",
+  "Access-Control-Allow-Origin": env.ALLOWED_ORIGIN || "",   // same-origin now; left for flexibility
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
 });
@@ -74,9 +74,10 @@ export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: cors(env) });
     const url = new URL(request.url);
-    if (request.method === "GET" && url.searchParams.get("lookup"))
-      return json({ parties: await lookup(env, url.searchParams.get("lookup")) }, 200, env);
-    if (request.method !== "POST") return json({ error: "POST only" }, 405, env);
+    if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
+    if (request.method === "GET" && url.pathname === "/api/lookup")
+      return json({ parties: await lookup(env, url.searchParams.get("lookup") || "") }, 200, env);
+    if (request.method !== "POST" || url.pathname !== "/api/rsvp") return json({ error: "Not found" }, 404, env);
 
     // Parse either multipart/urlencoded FormData or JSON.
     let data = {};

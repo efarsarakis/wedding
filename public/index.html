@@ -583,7 +583,7 @@ const SITE = {
   bookByDate:   { en: "1 April 2027", el: "1 Απριλίου 2027" },
   contactEmail: "hello@example.com",
   heroImage: "hero-watercolour.png",   // the watercolour, next to index.html; set "" to fall back to the SVG illustration
-  rsvpEndpoint: "https://wedding-rsvp.YOUR-SUBDOMAIN.workers.dev",   // from the Worker README
+  rsvpEndpoint: "/api/rsvp",          // same origin — the Worker in src/ handles /api/*
   paypal: "https://paypal.me/YOURHANDLE",
   // Bank details, base64 — run in console: btoa(JSON.stringify({name:"…",sort:"00-00-00",account:"00000000"}))
   bankEncoded: "eyJuYW1lIjoiW0FjY291bnQgbmFtZV0iLCJzb3J0IjoiWzAwLTAwLTAwXSIsImFjY291bnQiOiJbMDAwMDAwMDBdIn0=",
@@ -729,11 +729,6 @@ document.getElementById('ics-btn').addEventListener('click', () => {
 /* forms → Worker */
 async function submitForm(form, statusEl, okMsg){
   if (!form.reportValidity()) return;
-  if (/YOUR-SUBDOMAIN/.test(SITE.rsvpEndpoint)) {
-    statusEl.className = 'form-status err';
-    statusEl.textContent = 'Form not connected yet — set SITE.rsvpEndpoint to your Worker URL (see rsvp-worker/README.md).';
-    return;
-  }
   statusEl.className = 'form-status busy'; statusEl.textContent = '…';
   try {
     const res = await fetch(SITE.rsvpEndpoint, { method: 'POST', body: new FormData(form) });

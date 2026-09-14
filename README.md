@@ -1,11 +1,33 @@
 # George & Manos — wedding site
 
-Static single-page site served by GitHub Pages. Everything guests see is `index.html`; the hero image is `hero-watercolour.png`.
+One Cloudflare Worker serves everything: the static site from `public/` and the RSVP API from `src/worker.js` (`/api/rsvp`, `/api/lookup`). Free tier, same origin, no CORS.
 
-- **Edit content:** all key details live in the `SITE` object at the bottom of `index.html` (names, dates, contact email, RSVP endpoint, PayPal, mode). Section text is in the HTML; Greek strings are in the `EL` dictionary just below `SITE`.
-- **Modes:** `SITE.mode = "savethedate"` (now) or `"rsvp"` (when invitations go out).
-- **RSVP backend:** `worker/` — a Cloudflare Worker that writes to the Airtable base. See `worker/README.md`.
-- **Deploy:** push to `main`; Pages serves the root.
-- **Custom domain:** add a `CNAME` file containing the domain and a CNAME DNS record pointing at `efarsarakis.github.io`.
+## Layout
+- `public/index.html` — the site. Key details in the `SITE` object at the bottom; Greek strings in `EL`.
+- `public/hero-watercolour.png` — hero image.
+- `src/worker.js` — RSVP endpoint writing to Airtable.
+- `wrangler.toml` — config. Base/table IDs are vars; the Airtable token is a secret.
 
-The site carries `noindex` and a blocking `robots.txt` — it's for guests with the link, not for search.
+## First deploy (once)
+```bash
+npm install -g wrangler
+wrangler login
+wrangler secret put AIRTABLE_TOKEN     # Airtable PAT, scopes data.records:read + write, this base only
+wrangler deploy
+```
+Prints `https://wedding.<your-subdomain>.workers.dev`. Test the interest form; a row should appear in Airtable → RSVPs.
+
+## Deploy on push (recommended)
+Cloudflare dashboard → Workers & Pages → `wedding` → Settings → Builds → *Connect to Git* → choose this repo, branch `main`, build command empty, deploy command `wrangler deploy`. From then on, every push deploys.
+
+## Custom domain
+Workers & Pages → `wedding` → Settings → Domains & Routes → *Add custom domain*. If the domain is registered at Cloudflare, DNS and HTTPS are handled automatically. Then set `SITE.contactEmail` and re-render the cards with the real URL.
+
+## Modes
+`SITE.mode = "savethedate"` now → `"rsvp"` when invitations go out (January).
+
+## Local preview
+`wrangler dev` → http://localhost:8787 (real fonts, real hero, real API).
+
+## Note
+`public/index.html` and `public/hero-watercolour.png` are large; take them from `wedding-repo.zip` in the parent folder (or from the repo). The other files here are the current versions.
