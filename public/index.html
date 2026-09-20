@@ -540,13 +540,27 @@
       <p data-i18n="gifts.p1">You are crossing seas and taking time off to be with us — that is the gift, and we don't expect anything more. Please, no boxes on the plane.</p>
       <p data-i18n="gifts.p2">If you'd nonetheless like to mark the day, a small contribution towards our honeymoon would be very kindly received — but we mean it when we say it's entirely optional.</p>
     </div>
-    <div class="gift-box">
-      <a class="btn" id="paypal-btn" href="https://paypal.me/YOURHANDLE" target="_blank" rel="noopener" data-i18n="gifts.paypal">Contribute via PayPal</a>
-      <details class="bank" id="bank-details">
-        <summary data-i18n="gifts.bank">Prefer a bank transfer?</summary>
-        <dl><dt data-i18n="gifts.b1">Name</dt><dd id="bank-name">…</dd><dt data-i18n="gifts.b2">Sort code</dt><dd id="bank-sort">…</dd><dt data-i18n="gifts.b3">Account</dt><dd id="bank-account">…</dd><dt data-i18n="gifts.b4">Reference</dt><dd data-i18n="gifts.b5">Your name</dd></dl>
-      </details>
+    <div class="grid2" id="bank-cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:820px;margin:2.6rem auto 0">
+      <div class="info-card">
+        <h3 data-i18n="gifts.eu.h">From Greece &amp; the eurozone <span class="tag">SEPA</span></h3>
+        <dl class="kv">
+          <dt data-i18n="gifts.b1">Name</dt><dd id="bank-eu-name">…</dd>
+          <dt>IBAN</dt><dd id="bank-iban">…</dd>
+          <dt>BIC</dt><dd id="bank-bic">…</dd>
+          <dt data-i18n="gifts.b4">Reference</dt><dd data-i18n="gifts.b5">Your name</dd>
+        </dl>
+      </div>
+      <div class="info-card">
+        <h3 data-i18n="gifts.uk.h">From the UK <span class="tag">Faster Payments</span></h3>
+        <dl class="kv">
+          <dt data-i18n="gifts.b1">Name</dt><dd id="bank-uk-name">…</dd>
+          <dt data-i18n="gifts.b2">Sort code</dt><dd id="bank-sort">…</dd>
+          <dt data-i18n="gifts.b3">Account</dt><dd id="bank-account">…</dd>
+          <dt data-i18n="gifts.b4">Reference</dt><dd data-i18n="gifts.b5">Your name</dd>
+        </dl>
+      </div>
     </div>
+    <p class="form-note" id="bank-fallback" data-i18n="gifts.paypal.last">If a transfer isn't possible, there's <a class="paypal-link" href="#" target="_blank" rel="noopener">PayPal</a> — though it takes a percentage, so a transfer gets more of your gift to us.</p>
   </div>
 </section>
 
@@ -596,9 +610,9 @@ const SITE = {
   // site key here, and set the matching secret with: wrangler secret put TURNSTILE_SECRET
   // Leave "" and the forms work exactly as before, with no bot check.
   turnstileSiteKey: "0x4AAAAAAE-CrHkyd26adgf_",
-  paypal: "https://paypal.me/YOURHANDLE",
-  // Bank details, base64 — run in console: btoa(JSON.stringify({name:"…",sort:"00-00-00",account:"00000000"}))
-  bankEncoded: "eyJuYW1lIjoiW0FjY291bnQgbmFtZV0iLCJzb3J0IjoiWzAwLTAwLTAwXSIsImFjY291bnQiOiJbMDAwMDAwMDBdIn0=",
+  paypal: "https://paypal.me/manosphi",   // fallback only — PayPal takes a percentage
+  // Bank details are NOT here. They live in the Worker secrets BANK_EU_* / BANK_UK_* and
+  // are fetched from /api/bank, so they stay out of the page source, the repo and Drive.
   defaultLang: "en"
 };
 
@@ -664,7 +678,9 @@ const EL = {
   "gifts.eyebrow":"Ειλικρινά","gifts.h":"Η παρουσία σας είναι το δώρο",
   "gifts.p1":"Ταξιδεύετε για να είστε μαζί μας — αυτό είναι το δώρο, και δεν περιμένουμε τίποτα άλλο. Σας παρακαλούμε, όχι κουτιά στο αεροπλάνο.",
   "gifts.p2":"Αν παρ' όλα αυτά θέλετε να τιμήσετε τη μέρα, μια μικρή συμβολή στο ταξίδι του μέλιτος θα ήταν ευπρόσδεκτη — αλλά το εννοούμε ότι είναι εντελώς προαιρετικό.",
-  "gifts.paypal":"Συμβολή μέσω PayPal","gifts.bank":"Προτιμάτε τραπεζική μεταφορά;","gifts.b1":"Όνομα","gifts.b2":"Sort code","gifts.b3":"Λογαριασμός","gifts.b4":"Αιτιολογία","gifts.b5":"Το όνομά σας",
+  "gifts.eu.h":"Από Ελλάδα &amp; ευρωζώνη <span class=\"tag\">SEPA</span>","gifts.uk.h":"Από το Ηνωμένο Βασίλειο <span class=\"tag\">Faster Payments</span>",
+  "gifts.paypal.last":"Αν η τραπεζική μεταφορά δεν είναι εφικτή, υπάρχει και το <a class=\"paypal-link\" href=\"#\" target=\"_blank\" rel=\"noopener\">PayPal</a> — κρατάει όμως ένα ποσοστό, οπότε με μεταφορά φτάνει σε εμάς μεγαλύτερο μέρος του δώρου σας.",
+  "gifts.b1":"Όνομα","gifts.b2":"Sort code","gifts.b3":"Λογαριασμός","gifts.b4":"Αιτιολογία","gifts.b5":"Το όνομά σας",
   "faq.eyebrow":"Καλές ερωτήσεις",
   "faq.1.q":"Τι να φορέσω;","faq.1.a":"<strong>Summer fabulous.</strong> Λινά, χρώμα, ένα καλό καπέλο, το πουκάμισο που φυλάτε — ντυθείτε σαν οι φωτογραφίες να κρατήσουν πενήντα χρόνια, αλλά όχι τόσο που να μη χορεύετε τα μεσάνυχτα. Η τελετή είναι σε πέτρα, πάνω από το Λιβυκό — διαλέξτε παπούτσια ανάλογα. Τα σκωτσέζικα κιλτ είναι ευπρόσδεκτα· δεν θα είστε οι μόνοι.",
   "faq.2.q":"Γιατί Δευτέρα;","faq.2.a":"Επειδή ο χώρος είναι δικός μας όλη την εβδομάδα, και ένας γάμος τη Δευτέρα σημαίνει ότι έρχεστε Σάββατο, ξεκουράζεστε μια μέρα, και έχετε ακόμα την υπόλοιπη εβδομάδα μπροστά σας. Πάρτε άδεια Δευτέρα και Τρίτη — θα μας ευχαριστείτε.",
@@ -694,6 +710,7 @@ function setLang(lang){
   document.getElementById('name-2').textContent = SITE.name2[lang];
   const rd = document.getElementById('rsvp-deadline'); if (rd) rd.textContent = SITE.rsvpDeadline[lang];
   document.querySelectorAll('.contact-email').forEach(a => { a.textContent = SITE.contactEmail; a.href = 'mailto:' + SITE.contactEmail; });
+  document.querySelectorAll('.paypal-link').forEach(a => { a.href = SITE.paypal; });
   try { const u = new URL(location); u.searchParams.set('lang', lang); history.replaceState(null, '', u); } catch {}
 }
 document.getElementById('lang-toggle').addEventListener('click', () => setLang(document.documentElement.lang === 'el' ? 'en' : 'el'));
@@ -701,7 +718,6 @@ document.getElementById('lang-toggle').addEventListener('click', () => setLang(d
 document.body.className = 'mode-' + SITE.mode;
 document.getElementById('nav-mono').textContent = SITE.monogram;
 document.getElementById('footer-mono').textContent = SITE.monogram;
-document.getElementById('paypal-btn').href = SITE.paypal;
 const wd = new Date(SITE.weddingDateISO);
 document.getElementById('footer-date').textContent = wd.getDate() + ' · ' + (wd.getMonth()+1) + ' · ' + wd.getFullYear();
 // The watercolour is in the markup; swap to the SVG illustration only if it's turned off.
@@ -802,15 +818,33 @@ document.querySelectorAll('input[name="attending"]').forEach(r => r.addEventList
     (document.querySelector('input[name="attending"]:checked')?.value !== 'Regretfully declines');
 }));
 
-/* bank details decoded only when opened */
-document.getElementById('bank-details').addEventListener('toggle', function fill(e){
-  if (!e.target.open) return;
-  try { const b = JSON.parse(atob(SITE.bankEncoded));
-    document.getElementById('bank-name').textContent = b.name;
-    document.getElementById('bank-sort').textContent = b.sort;
-    document.getElementById('bank-account').textContent = b.account; } catch {}
-  e.target.removeEventListener('toggle', fill);
-});
+/* bank details: fetched from the Worker the first time the gifts section is scrolled to,
+   so they are never part of the page source. */
+const bankCards = document.getElementById('bank-cards');
+let bankLoaded = false;
+async function loadBank(){
+  if (bankLoaded) return; bankLoaded = true;
+  const set = (id, v) => { const el = document.getElementById(id); if (el && v) el.textContent = v; };
+  try {
+    const res = await fetch('/api/bank');
+    if (!res.ok) throw new Error();
+    const b = await res.json();
+    if (b.eu) { set('bank-eu-name', b.eu.name); set('bank-iban', b.eu.iban); set('bank-bic', b.eu.bic); }
+    if (b.uk) { set('bank-uk-name', b.uk.name); set('bank-sort', b.uk.sort); set('bank-account', b.uk.account); }
+  } catch {
+    bankCards.hidden = true;
+    const note = document.getElementById('bank-fallback');
+    note.textContent = document.documentElement.lang === 'el'
+      ? 'Γράψτε μας στο ' + SITE.contactEmail + ' για τα στοιχεία του λογαριασμού.'
+      : 'Write to us at ' + SITE.contactEmail + ' for our bank details.';
+  }
+}
+if (bankCards) {
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); loadBank(); } });
+    io.observe(bankCards);
+  } else loadBank();
+}
 </script>
 </body>
 </html>
