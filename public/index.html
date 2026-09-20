@@ -194,8 +194,14 @@
 </nav>
 
 <header class="hero" id="top">
-  <div class="art" id="hero-art" aria-hidden="true">
-    <!-- Illustrated fallback: Lentas at dusk — sky, Libyan Sea, the lion headland. Replaced by a photo if SITE.heroImage is set. -->
+  <!-- The watercolour, in the markup rather than injected by JS so the browser starts
+       fetching it immediately. 960px for phones, 1536px above that. -->
+  <picture>
+    <source media="(max-width:700px)" srcset="hero-960.webp" width="960" height="640">
+    <img class="art" src="hero-1536.webp" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="art" id="hero-art" aria-hidden="true" hidden>
+    <!-- Illustrated fallback: Lentas at dusk — sky, Libyan Sea, the lion headland. Shown only if SITE.heroImage is "". -->
     <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
@@ -584,7 +590,7 @@ const SITE = {
   rsvpDeadline: { en: "1 March 2027", el: "1 Μαρτίου 2027" },
   bookByDate:   { en: "1 April 2027", el: "1 Απριλίου 2027" },
   contactEmail: "hello@georgeandmanos.com",
-  heroImage: "hero-watercolour.png",   // the watercolour, next to index.html; set "" to fall back to the SVG illustration
+  heroImage: "hero-1536.webp",         // the watercolour <picture> in the markup; set "" to fall back to the SVG illustration
   rsvpEndpoint: "/api/rsvp",          // same origin — the Worker in src/ handles /api/*
   paypal: "https://paypal.me/YOURHANDLE",
   // Bank details, base64 — run in console: btoa(JSON.stringify({name:"…",sort:"00-00-00",account:"00000000"}))
@@ -694,9 +700,10 @@ document.getElementById('footer-mono').textContent = SITE.monogram;
 document.getElementById('paypal-btn').href = SITE.paypal;
 const wd = new Date(SITE.weddingDateISO);
 document.getElementById('footer-date').textContent = wd.getDate() + ' · ' + (wd.getMonth()+1) + ' · ' + wd.getFullYear();
-if (SITE.heroImage) {
-  const art = document.getElementById('hero-art');
-  art.innerHTML = '<img class="art" src="' + SITE.heroImage + '" alt="">';
+// The watercolour is in the markup; swap to the SVG illustration only if it's turned off.
+if (!SITE.heroImage) {
+  document.querySelector('.hero picture')?.remove();
+  document.getElementById('hero-art').hidden = false;
 }
 let startLang = SITE.defaultLang; try { startLang = new URLSearchParams(location.search).get('lang') || startLang; } catch {}
 setLang(startLang);
