@@ -4,7 +4,7 @@ One Cloudflare Worker serves everything: the static site from `public/` and the 
 
 ## Layout
 - `public/index.html` — the site. Key details in the `SITE` object at the bottom; Greek strings in `EL`.
-- `public/hero-watercolour.png` — hero image.
+- `public/hero-1536.webp`, `public/hero-960.webp` — hero image; PNG master in `assets-src/`.
 - `src/worker.js` — RSVP endpoint writing to Airtable.
 - `wrangler.toml` — config. Base/table IDs are vars; the Airtable token is a secret.
 
@@ -28,9 +28,14 @@ Create a widget at Cloudflare dashboard → Turnstile, then:
 wrangler secret put TURNSTILE_SECRET     # the widget's secret key
 ```
 and paste the **site key** into `SITE.turnstileSiteKey` in `public/index.html`.
-Both keys are needed: until `TURNSTILE_SECRET` is set the Worker skips the check and logs a
-warning on every submission (`wrangler tail` to see it); until the site key is set the forms
-send no token and would be rejected. Set the secret and the site key together.
+Both keys are needed, and the Worker **fails closed**: with no `TURNSTILE_SECRET` it refuses
+every submission and logs an error, rather than quietly accepting them. Set the secret and
+the site key together. For `wrangler dev` and the tests, `TURNSTILE_OPTIONAL = "true"` in
+`.dev.vars` is the explicit opt-out — never set it on the deployed Worker.
+
+`TURNSTILE_HOSTNAMES` in `wrangler.toml` lists the hostnames a token may be issued on.
+Cloudflare's `siteverify` returns `success: true` for any valid token, including one minted
+by a different site's widget, so the hostname is checked too.
 
 Every value that reaches a dropdown is allowlisted against the choices already in the base
 (`ATTENDING`, `LIKELY`, `EVENTS` at the top of `src/worker.js`) and `typecast` is off, so a
@@ -75,9 +80,10 @@ wrangler secret put BANK_UK_NAME      # UK — Faster Payments
 wrangler secret put BANK_UK_SORT
 wrangler secret put BANK_UK_ACCOUNT
 ```
-Either half can be left out: a card only appears if its `IBAN` / `ACCOUNT` is set. With
-neither set, `/api/bank` returns 503 and the page replaces both cards with "write to us for
-our bank details", so nothing looks broken. `SITE.paypal` in `public/index.html` still needs
+Either half can be left out: the page hides a card whose details are missing. With neither
+set, `/api/bank` returns 503 and the page replaces both cards with "write to us for our bank
+details". **The endpoint only answers while `RSVP_OPEN` is `"true"`** — before that it 404s,
+so the account details are not fetchable during the save-the-date phase. `SITE.paypal` in `public/index.html` still needs
 your real PayPal handle for the fallback link.
 
 For `wrangler dev`, put the same names in a `.dev.vars` file (gitignored). Note that
@@ -87,8 +93,10 @@ For `wrangler dev`, put the same names in a `.dev.vars` file (gitignored). Note 
 Every submission appends a row, so a change of mind is kept rather than overwritten and you
 can see what someone said and when. For a clean headcount, make a view in Airtable → RSVPs:
 *Group by* Email, *Sort* Submitted ↓ — the top row in each group is that guest's current
-answer. The per-guest ticks on the **Guests** table are always overwritten, so that table
-already reflects only the latest answer and is the one to count from.
+answer. The per-guest ticks on the **Guests** table are overwritten by each submission, so
+it usually reflects the latest answer — but see the caveat below: two submissions that
+overlap in time can leave Guests and the newest RSVP row disagreeing. Spot-check anything
+that looks odd against the timestamps rather than trusting either blindly.
 
 ## Modes
 `SITE.mode = "savethedate"` now → `"rsvp"` when invitations go out (January).
@@ -109,3 +117,27 @@ editor) behaves normally; Drive only ever syncs the pointer.
 
 One consequence: **`~/.git-stores/wedding-repo` is not backed up by Drive.** Push to GitHub
 as usual and that is your backup.
+
+
+## RSVP phase switch
+`RSVP_OPEN` in `wrangler.toml` is `"false"` until invitations go out. While it is false,
+`/api/lookup`, `/api/bank` and every per-guest write return 404 or 403 — the page does not
+use them yet, and leaving them reachable exposed the guest list and the account details for
+no benefit. Set it to `"true"` (and `SITE.mode = "rsvp"` in `public/index.html`) in January.
+
+## Accepted risk: surname-only access
+A guessed surname returns that household's member names and a token that can set their RSVP.
+There is no second factor. This is a deliberate choice — no code is printed on the
+invitations — and the mitigations around it (exact matching, rate limits, Turnstile on
+writes, endpoints closed until January) **reduce abuse rather than remove the capability**.
+A security review on 20 September 2026 judged this incompatible with the stated goals of a
+private guest list and preventing others from altering an RSVP. If that trade stops feeling
+right, per-party invitation links are the fix; nothing else in the design has to change.
+
+## Known limitation: overlapping submissions
+Guest ticks are written before the RSVP row is appended. Two submissions for the same party
+that overlap can finish with the Guests table and the newest RSVP row disagreeing, and an
+Airtable failure part-way through can leave guest rows updated with no RSVP row written.
+Retrying converges the guest ticks, which are idempotent, but appends a duplicate row.
+Fixing this properly needs a stable submission id and per-party serialisation; it is not
+done. Before finalising catering numbers, reconcile the two tables rather than trusting one.

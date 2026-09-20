@@ -6,14 +6,23 @@ compatibility_date = "2026-09-01"
 directory = "./public"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
-# Without this, a browser hitting /api/... directly gets index.html back instead of the
-# Worker, because assets are matched before the script runs.
-run_worker_first = [ "/api/*" ]
+# Every request goes through the Worker. Scoped to /api/* the assets binding answered the
+# HTML directly, so neither the HTTPS redirect nor the security headers ever applied to the
+# page itself — which is the request that needs them most.
+run_worker_first = true
 
 [vars]
 AIRTABLE_BASE  = "appivWbWyQlQqGJTB"
 AIRTABLE_TABLE = "tblfcALpXOklfXfG0"
 GUESTS_TABLE   = "tbllrariezt3kKrsq"
+
+# Flip to "true" when invitations go out in January. While false, /api/lookup, /api/bank and
+# all per-guest writes return 404 — the page does not use them yet, and leaving them reachable
+# exposed the guest list and the account details for no benefit.
+RSVP_OPEN      = "false"
+
+# Turnstile tokens are only accepted if siteverify says they were issued on one of these.
+TURNSTILE_HOSTNAMES = "georgeandmanos.com,www.georgeandmanos.com"
 
 # Secret (set once, never commit):  wrangler secret put AIRTABLE_TOKEN
 

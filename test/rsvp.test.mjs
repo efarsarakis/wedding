@@ -30,7 +30,8 @@ globalThis.fetch = async (url, init={}) => {
 };
 
 const env = { AIRTABLE_BASE:"appTEST", AIRTABLE_TABLE:"tblRSVPS", GUESTS_TABLE:"tblGUESTS",
-              AIRTABLE_TOKEN:"tok", RSVP_SIGNING_KEY:"test-signing-key-32-chars-long!!", ASSETS:{fetch:async()=>new Response("asset")} };
+              AIRTABLE_TOKEN:"tok", RSVP_SIGNING_KEY:"test-signing-key-32-chars-long!!",
+              RSVP_OPEN:"true", TURNSTILE_OPTIONAL:"true", ASSETS:{fetch:async()=>new Response("asset")} };
 
 const get  = p => worker.fetch(new Request("https://x"+p), env);
 const post = body => { const fd=new FormData(); for(const [k,v] of body) fd.append(k,v);
@@ -124,26 +125,30 @@ t("good env still works after a failure", good.parties.length === 1, JSON.string
 console.log("\n== select values are allowlisted (no schema pollution) ==");
 posted = [];
 r = await post([["name","Spammer"],["email","s@b.com"],["phase","rsvp"],
-                ["attending","BUY CHEAP PILLS"],["likely","<script>"],
-                ["events","Monday wedding"],["events","Free V1agra"]]);
-t("junk submission still returns 200", r.status === 200, r.status);
-let f = posted[0].records[0].fields;
-t("typecast is off", posted[0].typecast === undefined, JSON.stringify(posted[0]).slice(0,120));
-t("junk 'attending' dropped", f["fldBfK0qCznZDDtJG"] === undefined, f["fldBfK0qCznZDDtJG"]);
-t("junk 'likely' dropped", f["fldFvNX6Gk2qbTDW8"] === undefined, f["fldFvNX6Gk2qbTDW8"]);
-t("only the real event kept", JSON.stringify(f["fld0GcrHpvYtcKrjn"]) === '["Monday wedding"]', JSON.stringify(f["fld0GcrHpvYtcKrjn"]));
+                ["attending","BUY CHEAP PILLS"],["events","Monday wedding"]]);
+t("junk 'attending' is rejected, not silently dropped", r.status === 400, r.status);
+t("nothing written", posted.length === 0);
+posted = [];
+r = await post([["name","Spammer"],["email","s@b.com"],["phase","rsvp"],["events","Free V1agra"]]);
+t("junk event is rejected", r.status === 400, r.status);
+t("nothing written", posted.length === 0);
 
 posted = [];
 r = await post([["name","Kay"],["email","k@b.com"],["phase","rsvp"],["attending","Joyfully accepts"],["events","Sunday welcome"]]);
-f = posted[0].records[0].fields;
+let f = posted[0].records[0].fields;
+t("typecast is off", posted[0].typecast === undefined, JSON.stringify(posted[0]).slice(0,120));
 t("valid values still pass through", f["fldBfK0qCznZDDtJG"] === "Joyfully accepts" && JSON.stringify(f["fld0GcrHpvYtcKrjn"]) === '["Sunday welcome"]', JSON.stringify(f));
 
 posted = [];
-r = await post([["name","x".repeat(500)],["email","k@b.com"],["phase","interest"],["message","m".repeat(5000)],["guests","9999"]]);
+r = await post([["name","x".repeat(500)],["email","k@b.com"],["phase","interest"],["message","m".repeat(5000)],["guests","2"]]);
 f = posted[0].records[0].fields;
 t("name capped at 200", f["fldsuzKiBlqgLotnJ"].length === 200, f["fldsuzKiBlqgLotnJ"].length);
 t("message capped at 2000", f["fldKCNv9cRkQ7fsTD"].length === 2000, f["fldKCNv9cRkQ7fsTD"].length);
-t("party size clamped to 20", f["fldDOyeZ675aYZ39G"] === 20, f["fldDOyeZ675aYZ39G"]);
+for (const bad of ["9999","2.5","-1","1e3","abc"]) {
+  posted = [];
+  r = await post([["name","N"],["email","k@b.com"],["phase","interest"],["guests",bad]]);
+  t(`guests="${bad}" -> 400`, r.status === 400 && posted.length === 0, r.status);
+}
 
 r = await post([["name","Bad"],["email","not-an-email"],["phase","interest"]]);
 t("bad email -> 400", r.status === 400, r.status);
@@ -197,6 +202,103 @@ const used = new Set([
 ]);
 const missing = [...used].filter(id => !declared.has(id));
 t(`all ${used.size} referenced ids exist`, missing.length === 0, "missing: " + missing.join(", "));
+
+console.log("\n== review 2026-09-20: signing-key rotation (finding 1) ==");
+// An isolate can outlive a secret change, so the cached key must follow the secret.
+const oldEnv = { ...env, RSVP_SIGNING_KEY:"old-secret-aaaaaaaaaaaaaaaaaaaaaa" };
+const newEnv = { ...env, RSVP_SIGNING_KEY:"new-secret-bbbbbbbbbbbbbbbbbbbbbb" };
+let lk = await (await worker.fetch(new Request("https://x/api/lookup?surname=Farsarakis"), oldEnv)).json();
+const oldTok = lk.parties[0].token;
+patches = [];
+const rotPost = (body, e) => { const fd=new FormData(); for(const [k,v] of body) fd.append(k,v);
+  return worker.fetch(new Request("https://x/api/rsvp",{method:"POST",body:fd}), e); };
+r = await rotPost([["name","A"],["email","a@b.com"],["phase","rsvp"],["token",oldTok],["g0","coming"]], newEnv);
+t("token from the old secret is refused after rotation", r.status === 403, r.status);
+t("no guest patched", patches.flat().length === 0);
+r = await rotPost([["name","A"],["email","a@b.com"],["phase","rsvp"],["token",oldTok],["g0","coming"]], oldEnv);
+t("token still valid under its own secret", r.status === 200, r.status);
+
+console.log("\n== review 2026-09-20: answer integrity (finding 4) ==");
+lk = await (await get("/api/lookup?surname=Farsarakis")).json();
+const tk = lk.parties[0].token;
+const guestPost = body => { const fd=new FormData(); for(const [k,v] of body) fd.append(k,v);
+  return worker.fetch(new Request("https://x/api/rsvp",{method:"POST",body:fd}), env); };
+const base = [["name","Kay"],["email","k@b.com"],["phase","rsvp"],["token",tk]];
+
+patches = [];
+r = await guestPost([...base,["g0","coming"],["g0","coming"]]);
+t("repeated g0 rejected, not recorded as a decline", r.status === 400, r.status);
+t("no guest patched", patches.flat().length === 0);
+
+patches = [];
+r = await guestPost([...base,["g0","yes"]]);
+t("unknown answer rejected, not recorded as a decline", r.status === 400, r.status);
+t("no guest patched", patches.flat().length === 0);
+
+patches = [];
+r = await guestPost([...base,["g0","coming"],["g00","declined"]]);
+t("g0 + g00 rejected as duplicate addressing", r.status === 400, r.status);
+t("no guest patched", patches.flat().length === 0);
+
+patches = [];
+r = await guestPost([...base,["g0","declined"],["ev0","Monday wedding"]]);
+t("declined + events rejected", r.status === 400, r.status);
+
+patches = [];
+r = await guestPost([...base,["ev0","Monday wedding"]]);
+t("ev without matching g rejected", r.status === 400, r.status);
+
+patches = [];
+r = await guestPost([...base,["g0","coming"],["ev0","Monday wedding"],["g1","declined"]]);
+t("a well-formed submission still works", r.status === 200, r.status);
+t("both guests patched", patches.flat().length === 2, JSON.stringify(patches.flat().map(x=>x.id)));
+
+console.log("\n== review 2026-09-20: phase is not a capability (finding 7) ==");
+patches = [];
+r = await guestPost([["name","X"],["email","x@b.com"],["phase","interest"],["token",tk],["g0","coming"]]);
+t("interest phase cannot ride a token into Guests", r.status === 200 || r.status === 400, r.status);
+r = await post([["name","X"],["email","x@b.com"],["phase","nonsense"]]);
+t("unknown phase -> 400, not silently RSVP", r.status === 400, r.status);
+r = await post([["name","X"],["email","x@b.com"]]);
+t("missing phase -> 400", r.status === 400, r.status);
+
+console.log("\n== review 2026-09-20: malformed input (finding 8) ==");
+r = await worker.fetch(new Request("https://x/api/rsvp",{method:"POST",headers:{"content-type":"application/json"},body:"null"}), env);
+t("JSON null -> 400, not a 500", r.status === 400, r.status);
+r = await worker.fetch(new Request("https://x/api/rsvp",{method:"POST",headers:{"content-type":"application/json"},
+  body: JSON.stringify({name:"A",email:"a@b.com",phase:"rsvp",token:{},g0:"coming"})}), env);
+t("object token -> clean 403", r.status === 403, r.status);
+r = await guestPost([...base.slice(0,3),["token", tk + ".extra"],["g0","coming"]]);
+t("token with a third component rejected", r.status === 403, r.status);
+
+console.log("\n== review 2026-09-20: endpoints closed until January (findings 3, 9) ==");
+const shut = { ...env, RSVP_OPEN:"false" };
+r = await worker.fetch(new Request("https://x/api/lookup?surname=Farsarakis"), shut);
+t("lookup 404s while RSVP is closed", r.status === 404, r.status);
+r = await worker.fetch(new Request("https://x/api/bank"), { ...shut, BANK_UK_ACCOUNT:"12345678" });
+t("bank 404s while RSVP is closed", r.status === 404, r.status);
+r = await worker.fetch(new Request("https://x/api/rsvp",{method:"POST",body:(()=>{const f=new FormData();
+  f.append("name","A");f.append("email","a@b.com");f.append("phase","rsvp");return f;})()}), shut);
+t("rsvp phase refused while closed", r.status === 403, r.status);
+r = await worker.fetch(new Request("https://x/api/rsvp",{method:"POST",body:(()=>{const f=new FormData();
+  f.append("name","A");f.append("email","a@b.com");f.append("phase","interest");return f;})()}), shut);
+t("interest form still works while closed", r.status === 200, r.status);
+
+console.log("\n== review 2026-09-20: transport and headers (finding 2, 10) ==");
+r = await worker.fetch(new Request("http://x/"), env);
+t("http redirects 301 to https", r.status === 301 && r.headers.get("Location").startsWith("https://"), r.status + " " + r.headers.get("Location"));
+r = await worker.fetch(new Request("https://x/"), env);
+for (const h of ["Content-Security-Policy","X-Content-Type-Options","Referrer-Policy","Strict-Transport-Security","X-Frame-Options"])
+  t(`asset response sets ${h}`, !!r.headers.get(h), "missing");
+t("CSP forbids framing", (r.headers.get("Content-Security-Policy")||"").includes("frame-ancestors 'none'"));
+r = await worker.fetch(new Request("https://x/api/bank"), env);
+t("API response is hardened too", !!r.headers.get("Content-Security-Policy"));
+
+console.log("\n== review 2026-09-20: Turnstile (finding on siteverify) ==");
+r = await worker.fetch(new Request("https://x/api/rsvp",{method:"POST",body:(()=>{const f=new FormData();
+  f.append("name","A");f.append("email","a@b.com");f.append("phase","interest");return f;})()}),
+  { ...env, TURNSTILE_OPTIONAL:undefined });
+t("missing TURNSTILE_SECRET now fails closed", r.status === 403, r.status);
 
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);
