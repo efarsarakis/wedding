@@ -1,8 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- One glyph, not three: "G·M" was illegible at 16px and the dark tile read as a
-       black square in the tab strip. The gold ground keeps it visible against both
-       light and dark browser chrome, and echoes the ampersand in the hero. -->
-  <rect width="64" height="64" fill="#B9974E"/>
-  <text x="32" y="47" font-family="Georgia,'Times New Roman',serif" font-style="italic"
-        font-size="52" fill="#1D3244" text-anchor="middle">&amp;</text>
+  <!-- The sun on the horizon of the Libyan Sea, in the hero watercolour's palette.
+       Kept to three shapes: at 16px anything finer (rays, a reflection, the lion
+       headland) turns to mush. The warm sky over the flat dark sea gives the strong
+       light/dark split that makes the tab findable at a glance. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C4576A"/>
+      <stop offset=".45" stop-color="#DF8760"/>
+      <stop offset="1" stop-color="#F4CE8A"/>
+    </linearGradient>
+    <clipPath id="skyline"><rect x="0" y="0" width="64" height="44"/></clipPath>
+  </defs>
+  <rect width="64" height="44" fill="url(#sky)"/>
+  <circle cx="32" cy="44" r="18" fill="#FFE4A3" clip-path="url(#skyline)"/>
+  <rect y="44" width="64" height="20" fill="#1D3244"/>
 </svg>
