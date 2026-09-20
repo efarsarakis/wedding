@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#1D3244"/>
-  <text x="32" y="41" font-family="Georgia,serif" font-size="26" fill="#B9974E"
-        text-anchor="middle" letter-spacing="1">G·M</text>
+  <!-- One glyph, not three: "G·M" was illegible at 16px and the dark tile read as a
+       black square in the tab strip. The gold ground keeps it visible against both
+       light and dark browser chrome, and echoes the ampersand in the hero. -->
+  <rect width="64" height="64" fill="#B9974E"/>
+  <text x="32" y="47" font-family="Georgia,'Times New Roman',serif" font-style="italic"
+        font-size="52" fill="#1D3244" text-anchor="middle">&amp;</text>
 </svg>
