@@ -300,5 +300,23 @@ r = await worker.fetch(new Request("https://x/api/rsvp",{method:"POST",body:(()=
   { ...env, TURNSTILE_OPTIONAL:undefined });
 t("missing TURNSTILE_SECRET now fails closed", r.status === 403, r.status);
 
+console.log("\n== page content: translations and placeholders ==");
+// Every visible string has a Greek counterpart, and vice versa — a key added to the markup
+// without an EL entry silently shows English to Greek guests.
+const keys = new Set([...html.matchAll(/data-i18n="([^"]+)"/g)].map(m => m[1]));
+const elBlock = html.slice(html.indexOf("const EL = {"), html.indexOf("/* ---------- boot"));
+const elKeys = new Set([...elBlock.matchAll(/"([a-z0-9.]+)"\s*:/gi)].map(m => m[1]));
+const noEl = [...keys].filter(k => !elKeys.has(k));
+const orphan = [...elKeys].filter(k => !keys.has(k));
+t(`all ${keys.size} data-i18n keys have Greek`, noEl.length === 0, "missing EL: " + noEl.join(", "));
+t("no orphaned Greek keys", orphan.length === 0, "orphans: " + orphan.join(", "));
+
+// [Name] / [phone] style placeholders must never reach the live page.
+const ph = [...html.matchAll(/\[(Name|phone|Όνομα|τηλέφωνο|Account name|00-00-00|00000000)\]/g)].map(m => m[0]);
+t("no square-bracket placeholders left in the page", ph.length === 0, ph.join(", "));
+
+// The flight copy promised a seat release that has already happened.
+t("no stale 'coming weeks' flight promise", !/over the coming weeks/i.test(html));
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);
