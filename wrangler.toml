@@ -6,6 +6,9 @@ compatibility_date = "2026-09-01"
 directory = "./public"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
+# Without this, a browser hitting /api/... directly gets index.html back instead of the
+# Worker, because assets are matched before the script runs.
+run_worker_first = [ "/api/*" ]
 
 [vars]
 AIRTABLE_BASE  = "appivWbWyQlQqGJTB"
@@ -13,3 +16,25 @@ AIRTABLE_TABLE = "tblfcALpXOklfXfG0"
 GUESTS_TABLE   = "tbllrariezt3kKrsq"
 
 # Secret (set once, never commit):  wrangler secret put AIRTABLE_TOKEN
+
+# Per-IP rate limits (GA binding). period must be 10 or 60.
+[[ratelimits]]
+name = "LOOKUP_LIMIT"
+namespace_id = "1001"
+  [ratelimits.simple]
+  limit = 12
+  period = 60
+
+[[ratelimits]]
+name = "RSVP_LIMIT"
+namespace_id = "1002"
+  [ratelimits.simple]
+  limit = 6
+  period = 60
+
+[[ratelimits]]
+name = "BANK_LIMIT"
+namespace_id = "1003"
+  [ratelimits.simple]
+  limit = 10
+  period = 60
