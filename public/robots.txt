@@ -1,2 +1,5 @@
+# The page carries <meta name="robots" content="noindex, nofollow">, which keeps it out
+# of search results. Crawling has to be allowed for that tag to be read at all — and it
+# lets WhatsApp, iMessage, Slack and Facebook render the link preview card.
 User-agent: *
-Disallow: /
+Allow: /
