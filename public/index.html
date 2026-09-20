@@ -714,6 +714,10 @@ const EN = {}; // captured from the HTML on first run
 document.querySelectorAll('[data-i18n]').forEach(el => { EN[el.dataset.i18n] = el.innerHTML; });
 
 const LANGS = ['en','el'];
+// Declared up here on purpose: setLang reads it during boot, and a `let` further down the
+// file is in the temporal dead zone at that point. `typeof` does not save you there — it
+// throws for let/const, unlike for an undeclared name.
+let bankState = 'idle';                 // idle | loading | ok | failed
 function setLang(lang){
   if (!LANGS.includes(lang)) lang = SITE.defaultLang;   // ?lang=fr used to render "undefined"
   document.documentElement.lang = lang;
@@ -732,7 +736,7 @@ function setLang(lang){
   document.querySelectorAll('.paypal-link').forEach(a => { a.href = SITE.paypal; });
   // re-rendering the gifts paragraph would otherwise restore the PayPal text over the
   // "email us for our details" message
-  if (typeof bankState !== 'undefined' && bankState === 'failed') bankFailed();
+  if (bankState === 'failed') bankFailed();
   try { const u = new URL(location); u.searchParams.set('lang', lang); history.replaceState(null, '', u); } catch {}
 }
 document.getElementById('lang-toggle').addEventListener('click', () => setLang(document.documentElement.lang === 'el' ? 'en' : 'el'));
@@ -746,7 +750,8 @@ document.getElementById('footer-date').textContent = (() => {
   try {
     const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Europe/Athens', day:'numeric', month:'numeric', year:'numeric' })
       .formatToParts(wd).reduce((a,x) => (a[x.type] = x.value, a), {});
-    return parts.day + ' · ' + parts.month + ' · ' + parts.year;
+    // en-GB pads to 06/09; the footer has always read 6 · 9 · 2027.
+    return Number(parts.day) + ' · ' + Number(parts.month) + ' · ' + parts.year;
   } catch { return '6 · 9 · 2027'; }
 })();
 // The watercolour is in the markup; swap to the SVG illustration only if it's turned off.
@@ -878,10 +883,10 @@ syncAttending();
 /* bank details: fetched from the Worker the first time the gifts section is scrolled to,
    so they are never part of the page source. */
 const bankCards = document.getElementById('bank-cards');
-let bankState = 'idle';                 // idle | loading | ok | failed
 function bankFailed(){
   bankState = 'failed';
-  if (bankCards) bankCards.hidden = true;
+  const cards = document.getElementById('bank-cards');   // not the const below; see above
+  if (cards) cards.hidden = true;
   const note = document.getElementById('bank-fallback');
   if (note) note.textContent = document.documentElement.lang === 'el'
     ? 'Γράψτε μας στο ' + SITE.contactEmail + ' για τα στοιχεία του λογαριασμού.'

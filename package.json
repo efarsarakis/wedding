@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node test/rsvp.test.mjs",
+    "test": "node test/rsvp.test.mjs && node test/page.test.mjs",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   }
