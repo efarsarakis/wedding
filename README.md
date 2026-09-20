@@ -40,8 +40,16 @@ to the matching list too.
 ## How the RSVP lookup is secured
 `/api/lookup?surname=…` matches the **whole** surname (or a whole entry in the Guests
 table's *Lookup names*), never a fragment, and is rate-limited per IP. It returns each party
-member's display name and type — no Airtable record IDs, no RSVP status — plus a short-lived
-token signed with `RSVP_SIGNING_KEY`.
+member's display name and type, no RSVP status, plus a short-lived token signed with
+`RSVP_SIGNING_KEY`.
+
+That token is **signed, not encrypted**: anyone can base64-decode it and read the party and
+guest record IDs inside. That is deliberate and harmless — every Airtable operation needs the
+API token, which never leaves the Worker, so the IDs alone grant nothing, and you only get
+them for a party whose surname you already matched in full. What the signature buys is that
+the token cannot be forged or extended: you cannot mint one for a party you never looked up,
+and adding a guest to the list invalidates it. If you ever want the IDs opaque too, encrypt
+the payload with AES-GCM instead of signing it.
 
 `/api/rsvp` will only tick guests named by their **index in that signed token** (`g0`, `g1`, …,
 with repeated `ev0`, `ev1`, … for events). A submission therefore can't touch anybody outside
