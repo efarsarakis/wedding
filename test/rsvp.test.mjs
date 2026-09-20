@@ -187,5 +187,16 @@ const html = await (await import("node:fs/promises")).readFile(new URL("../publi
 t("no bankEncoded left in HTML", !html.includes("bankEncoded"));
 t("no base64 account blob left", !/eyJuYW1l/.test(html));
 
+console.log("\n== every element id the script touches exists in the markup ==");
+// A silent mismatch here (markup renamed, script not) leaves fields permanently blank,
+// which no amount of Worker testing would catch.
+const declared = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]));
+const used = new Set([
+  ...[...html.matchAll(/getElementById\('([^']+)'\)/g)].map(m => m[1]),
+  ...[...html.matchAll(/(?<![.\w])set\('([^']+)'/g)].map(m => m[1]),  // the local set() helper, not searchParams.set
+]);
+const missing = [...used].filter(id => !declared.has(id));
+t(`all ${used.size} referenced ids exist`, missing.length === 0, "missing: " + missing.join(", "));
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);
