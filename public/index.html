@@ -592,6 +592,10 @@ const SITE = {
   contactEmail: "hello@georgeandmanos.com",
   heroImage: "hero-1536.webp",         // the watercolour <picture> in the markup; set "" to fall back to the SVG illustration
   rsvpEndpoint: "/api/rsvp",          // same origin — the Worker in src/ handles /api/*
+  // Cloudflare Turnstile. Create a widget at dash.cloudflare.com → Turnstile, paste the
+  // site key here, and set the matching secret with: wrangler secret put TURNSTILE_SECRET
+  // Leave "" and the forms work exactly as before, with no bot check.
+  turnstileSiteKey: "0x4AAAAAAE-CrHkyd26adgf_",
   paypal: "https://paypal.me/YOURHANDLE",
   // Bank details, base64 — run in console: btoa(JSON.stringify({name:"…",sort:"00-00-00",account:"00000000"}))
   bankEncoded: "eyJuYW1lIjoiW0FjY291bnQgbmFtZV0iLCJzb3J0IjoiWzAwLTAwLTAwXSIsImFjY291bnQiOiJbMDAwMDAwMDBdIn0=",
@@ -735,17 +739,52 @@ document.getElementById('ics-btn').addEventListener('click', () => {
   a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics); a.download = 'wedding.ics'; a.click();
 });
 
+/* Turnstile: renders into both forms and adds its own hidden cf-turnstile-response input */
+if (SITE.turnstileSiteKey) {
+  document.querySelectorAll('#interest-form, #rsvp-form').forEach(f => {
+    const box = document.createElement('div');
+    box.className = 'cf-turnstile';
+    box.dataset.sitekey = SITE.turnstileSiteKey;
+    box.style.margin = '0 0 1.1rem';
+    f.insertBefore(box, f.querySelector('button[type=submit]'));
+  });
+  const s = document.createElement('script');
+  s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  s.async = true; s.defer = true;
+  document.head.appendChild(s);
+}
+
 /* forms → Worker */
+// Why the submission failed, in both languages. A guest who is rate-limited or whose
+// bot check lapsed can act on that; "something went wrong" just sends them to email.
+const ERRS = {
+  400: { en: 'Please check your name and email address.',
+         el: 'Ελέγξτε το όνομα και το email σας.' },
+  403: { en: "We couldn't verify that you're human. Please reload the page and try again.",
+         el: 'Δεν μπορέσαμε να επιβεβαιώσουμε ότι δεν είστε ρομπότ. Ανανεώστε τη σελίδα και δοκιμάστε ξανά.' },
+  429: { en: 'Too many attempts. Please wait a minute and try again.',
+         el: 'Πολλές προσπάθειες. Περιμένετε ένα λεπτό και δοκιμάστε ξανά.' },
+};
 async function submitForm(form, statusEl, okMsg){
   if (!form.reportValidity()) return;
+  const lang = document.documentElement.lang;
   statusEl.className = 'form-status busy'; statusEl.textContent = '…';
   try {
     const res = await fetch(SITE.rsvpEndpoint, { method: 'POST', body: new FormData(form) });
-    if (!res.ok) throw new Error();
-    statusEl.className = 'form-status ok'; statusEl.textContent = okMsg[document.documentElement.lang]; form.reset();
+    if (!res.ok) {
+      statusEl.className = 'form-status err';
+      statusEl.textContent = (ERRS[res.status] || {})[lang] || (lang === 'el'
+        ? 'Κάτι πήγε στραβά. Στείλτε μας email — ' + SITE.contactEmail
+        : 'Something went wrong. Please email us instead — ' + SITE.contactEmail);
+      if (window.turnstile) try { turnstile.reset(); } catch {}
+      return;
+    }
+    statusEl.className = 'form-status ok'; statusEl.textContent = okMsg[lang]; form.reset();
+    // form.reset() clears the Turnstile token, so ask for a fresh one
+    if (window.turnstile) try { turnstile.reset(); } catch {}
   } catch {
     statusEl.className = 'form-status err';
-    statusEl.textContent = document.documentElement.lang === 'el'
+    statusEl.textContent = lang === 'el'
       ? 'Κάτι πήγε στραβά. Στείλτε μας email — ' + SITE.contactEmail
       : 'Something went wrong. Please email us instead — ' + SITE.contactEmail;
   }
